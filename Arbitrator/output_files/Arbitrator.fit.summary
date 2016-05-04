@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed May 04 11:04:02 2016
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : Arbitrator
+Top-level Entity Name : Arbitrator
+Family : Cyclone II
+Device : EP2C70F896C6
+Timing Models : Final
+Total logic elements : 103 / 68,416 ( < 1 % )
+    Total combinational functions : 103 / 68,416 ( < 1 % )
+    Dedicated logic registers : 81 / 68,416 ( < 1 % )
+Total registers : 81
+Total pins : 91 / 622 ( 15 % )
+Total virtual pins : 0
+Total memory bits : 0 / 1,152,000 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 300 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )
