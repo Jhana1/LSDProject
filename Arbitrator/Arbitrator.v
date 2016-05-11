@@ -29,17 +29,6 @@ module Arbitrator(input iClk,
 						output [15:0] oWr2_data						
 );
 
-// TOUCH TCON DATA LOCATION
-// RED      =  Wr1_DATA[9:2]
-// GREEN    = {Wr1_DATA[14:10], Wr2_DATA[14:12]}
-// BLUE     =  Wr2_DATA[9:2]
-// Wr1_DATA = 0GGG GGRR RRRR RR00
-// Wr2_DATA = 0GGG 00BB BBBB BB00
-
-assign oWr1_data = {1'd0, disp_G[7:3], 		disp_R, 2'd0};
-assign oWr2_data = {1'd0, disp_G[2:0], 2'd0, disp_B, 2'd0};
-
-
 // Input Delay Registers
 // RGB
 reg rRGB_valid;
@@ -63,10 +52,19 @@ reg [2:0] rSelect;
 // Output Registers
 reg [7:0] disp_R, disp_G, disp_B;
 
+// TOUCH TCON DATA LOCATION
+// RED      =  Wr1_DATA[9:2]
+// GREEN    = {Wr1_DATA[14:10], Wr2_DATA[14:12]}
+// BLUE     =  Wr2_DATA[9:2]
+// Wr1_DATA = 0GGG GGRR RRRR RR00
+// Wr2_DATA = 0GGG 00BB BBBB BB00
+assign oWr1_data = {1'd0, disp_G[7:3], 		disp_R, 2'd0};
+assign oWr2_data = {1'd0, disp_G[2:0], 2'd0, disp_B, 2'd0};
+
 
 always @(posedge iClk)
 begin
-	if (iRst_n)
+	if (!iRst_n)
 	begin
 		// General Reset
 		disp_R	  <= 0;

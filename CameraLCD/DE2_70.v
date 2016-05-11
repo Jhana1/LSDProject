@@ -512,7 +512,56 @@ RAW2RGB				u3	(	.iCLK(CCD_PIXCLK),		//LK: pixel clock running at 60 MHz
 							.iX_Cont(X_Cont),		// x camera pixel coordinate
 							.iY_Cont(Y_Cont)		// y camera pixel coordinate
 						);
+						
+						
+						
+wire GRAY_VAL;
+wire [7:0] GRAY_DATA;
 
+RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
+              .iReset_n(DLY_RST_1),
+              .iRed(sCCD_R),
+              .iGreen(sCCD_G),
+              .iBlue(sCCD_B),
+              .iDval(sCCD_DVAL),
+              .oGray(GRAY_DATA),
+              .oDval(GRAY_VAL)				
+              );
+						
+Arbitrator arbiter(.iClk(CCD_PIXCLK),
+						 .iRst_n(DLY_RST_1),
+						 .iFval(rCCD_FVAL),
+						// Select Input
+						.iSelect(iSW[15:13]),
+						// RGB Inputs
+						.iRGB_valid(sCCD_DVAL),
+						.iRGB_R(sCCD_R),
+						.iRGB_G(sCCD_G),
+						.iRGB_B(sCCD_B),
+						
+						// GRAY Inputs
+						.iGray_valid(GRAY_VAL),
+						.iGray(GRAY_DATA),
+						
+						// Histogram Inputs
+						/*input iHist_valid,
+						input [7:0] iHist,
+						
+						// Threshold Input
+						input iThresh_valid,
+						input [7:0] iThresh,*/
+						
+						// Outputs
+						.oWr1_valid(wr1_valid),
+						.oWr2_valid(wr2_valid),
+						.oWr1_data(wr1_data),
+						.oWr2_data(wr2_data)
+);
+
+wire [15:0] wr1_data, wr2_data;
+wire wr1_valid, wr2_valid;
+						
+						
 // LK: takes 32 bit iDIG input and displays this on 8 seven segment displays oSEG0..7
 SEG7_LUT_8 			u4	(	.oSEG0(oHEX0_D),.oSEG1(oHEX1_D),
 							.oSEG2(oHEX2_D),.oSEG3(oHEX3_D),
@@ -534,8 +583,8 @@ sdram_pll 			u6	(	.inclk0(iCLK_50_3),
 
 assign CCD_MCLK = rClk[0];
 
-wire [15:0] wr1_data = iSW[1]? (X_Cont[3]/*^ Frame_Cont[0]*/? 15'b111111111111111:15'b0): {sCCD_G[11:7],	 sCCD_B[11:2]};
-wire [15:0] wr2_data = iSW[1]? (X_Cont[3]/*^ Frame_Cont[0]*/? 10'b111111111111111:15'b0): {sCCD_G[6:2],    sCCD_R[11:2]};
+//wire [15:0] wr1_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 15'b111111111111111:15'b0): {sCCD_G[11:7],	 sCCD_B[11:2]};
+//wire [15:0] wr2_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 10'b111111111111111:15'b0): {sCCD_G[6:2],    sCCD_R[11:2]};
 
 // LK: The SDRAM is used as a frame buffer using two of these Sdram_Control_4Port modules -  one for each SDRAM chip on the DE2-70 board.
 //     Camera data is loaded into the FIFO Write Side 1 and read out by the LCD display driver.
@@ -548,7 +597,8 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr1_data),  // LK: Camera Green and Blue components.
 //						    .WR1_DATA({sCCD_G[11:7],	 sCCD_B[11:2]}),  // LK: Camera Green and Blue components.
-							.WR1(sCCD_DVAL),							  // LK: When 1 data is written to memory via FIFO on next WR1_CLK edge 
+							//.WR1(sCCD_DVAL),							  // LK: When 1 data is written to memory via FIFO on next WR1_CLK edge 
+							.WR1(wr1_valid),
 							.WR1_ADDR(0),									// LK: SDRAM start address - do not alter!
 							.WR1_MAX_ADDR(800*480),							//LK:  Buffer size.  Needs a RESET_N to take effect.
 							.WR1_LENGTH(9'h100),							// LK: SDRAM line length of 256 - do not alter!							
@@ -587,7 +637,8 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr2_data),
 //						    .WR1_DATA({sCCD_G[6:2], sCCD_R[11:2]}),
-							.WR1(sCCD_DVAL),
+							//.WR1(sCCD_DVAL),
+							.WR1(wr2_valid),
 							.WR1_ADDR(0),
 							.WR1_MAX_ADDR(800*480),
 							.WR1_LENGTH(9'h100),

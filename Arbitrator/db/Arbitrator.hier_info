@@ -1,4 +1,7 @@
-|Arbitrator
+|Arbitrator_tb
+
+
+|Arbitrator_tb|Arbitrator:a1
 iClk => rSelect[0].CLK
 iClk => rSelect[1].CLK
 iClk => rSelect[2].CLK
