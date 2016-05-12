@@ -4,29 +4,29 @@ TimeQuest Timing Analyzer Summary
 
 Type  : Slow Model Setup 'N/C'
 Slack : -4.602
-TNS   : -142.304
+TNS   : -142.100
 
 Type  : Slow Model Setup 'CCD_PIXCLK'
-Slack : -3.262
-TNS   : -228.727
+Slack : -2.931
+TNS   : -211.386
 
 Type  : Slow Model Setup 'sdram_pll:u6|altpll:altpll_component|_clk0'
 Slack : -0.330
 TNS   : -6.562
 
 Type  : Slow Model Setup 'iCLK_50'
-Slack : 13.636
+Slack : 12.599
 TNS   : 0.000
 
 Type  : Slow Model Setup 'vga_pll:u5|altpll:altpll_component|_clk0'
-Slack : 23.293
+Slack : 23.372
+TNS   : 0.000
+
+Type  : Slow Model Hold 'CCD_PIXCLK'
+Slack : 0.391
 TNS   : 0.000
 
 Type  : Slow Model Hold 'iCLK_50'
-Slack : -0.071
-TNS   : -0.071
-
-Type  : Slow Model Hold 'CCD_PIXCLK'
 Slack : 0.391
 TNS   : 0.000
 
@@ -43,23 +43,23 @@ Slack : 2.476
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'CCD_PIXCLK'
-Slack : -4.261
-TNS   : -1099.215
+Slack : -3.921
+TNS   : -1097.117
 
 Type  : Slow Model Recovery 'sdram_pll:u6|altpll:altpll_component|_clk0'
-Slack : 1.341
+Slack : 1.595
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'iCLK_50'
-Slack : 10.882
+Slack : 11.393
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'vga_pll:u5|altpll:altpll_component|_clk0'
-Slack : 13.268
+Slack : 13.324
 TNS   : 0.000
 
 Type  : Slow Model Removal 'iCLK_50'
-Slack : 1.649
+Slack : 2.608
 TNS   : 0.000
 
 Type  : Slow Model Removal 'CCD_PIXCLK'
@@ -67,7 +67,7 @@ Slack : 2.675
 TNS   : 0.000
 
 Type  : Slow Model Removal 'sdram_pll:u6|altpll:altpll_component|_clk0'
-Slack : 4.363
+Slack : 4.368
 TNS   : 0.000
 
 Type  : Slow Model Removal 'vga_pll:u5|altpll:altpll_component|_clk0'
@@ -111,30 +111,30 @@ Slack : 37.223
 TNS   : 0.000
 
 Type  : Fast Model Setup 'N/C'
-Slack : -1.862
-TNS   : -57.179
+Slack : -1.863
+TNS   : -57.073
 
 Type  : Fast Model Setup 'CCD_PIXCLK'
-Slack : -1.452
-TNS   : -98.369
+Slack : -1.291
+TNS   : -88.973
 
 Type  : Fast Model Setup 'sdram_pll:u6|altpll:altpll_component|_clk0'
 Slack : 0.142
 TNS   : 0.000
 
 Type  : Fast Model Setup 'iCLK_50'
-Slack : 16.983
+Slack : 16.298
 TNS   : 0.000
 
 Type  : Fast Model Setup 'vga_pll:u5|altpll:altpll_component|_clk0'
-Slack : 26.976
-TNS   : 0.000
-
-Type  : Fast Model Hold 'iCLK_50'
-Slack : 0.106
+Slack : 27.051
 TNS   : 0.000
 
 Type  : Fast Model Hold 'CCD_PIXCLK'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'iCLK_50'
 Slack : 0.215
 TNS   : 0.000
 
@@ -151,23 +151,23 @@ Slack : 1.240
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'CCD_PIXCLK'
-Slack : -2.249
-TNS   : -620.405
+Slack : -2.100
+TNS   : -619.067
 
 Type  : Fast Model Recovery 'sdram_pll:u6|altpll:altpll_component|_clk0'
-Slack : 2.300
+Slack : 2.416
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'vga_pll:u5|altpll:altpll_component|_clk0'
-Slack : 14.081
+Slack : 14.118
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'iCLK_50'
-Slack : 15.411
+Slack : 15.788
 TNS   : 0.000
 
 Type  : Fast Model Removal 'iCLK_50'
-Slack : 1.318
+Slack : 1.438
 TNS   : 0.000
 
 Type  : Fast Model Removal 'CCD_PIXCLK'
@@ -175,7 +175,7 @@ Slack : 1.626
 TNS   : 0.000
 
 Type  : Fast Model Removal 'sdram_pll:u6|altpll:altpll_component|_clk0'
-Slack : 3.913
+Slack : 3.916
 TNS   : 0.000
 
 Type  : Fast Model Removal 'vga_pll:u5|altpll:altpll_component|_clk0'
