@@ -608,6 +608,22 @@ set_global_assignment -name SEARCH_PATH Sdram_Control_4Port/ -tag from_archive
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name TIMEQUEST_DO_REPORT_TIMING ON
 set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL OFF
+set_global_assignment -name VERILOG_FILE HistogramDisplayer.v
+set_global_assignment -name VERILOG_FILE HistogramCell.v
+set_global_assignment -name VERILOG_FILE Histogram.v
+set_global_assignment -name VERILOG_FILE CCD_Capture.v
+set_global_assignment -name VERILOG_FILE touch_tcon.v
+set_global_assignment -name VERILOG_FILE Arbitrator.v
+set_global_assignment -name SDC_FILE DE2_70.sdc
+set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/command.v
+set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/control_interface.v
+set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/sdr_data_path.v
+set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_Control_4Port.v
+set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_FIFO.v
+set_global_assignment -name SOURCE_FILE Sdram_Control_4Port/Sdram_Params.h
+set_global_assignment -name VERILOG_FILE RAW2RGB.v
+set_global_assignment -name VERILOG_FILE RGB2GRAY.v
+set_global_assignment -name QIP_FILE MegaRam.qip
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
@@ -734,16 +750,4 @@ set_instance_assignment -name LL_MEMBER_OF "Sdram_Control_4Port:u8" -to "DE2_70|
 set_instance_assignment -name LL_MEMBER_OF "I2C_CCD_Config:u9" -to "DE2_70|I2C_CCD_Config:u9" -section_id "I2C_CCD_Config:u9"
 set_instance_assignment -name LL_MEMBER_OF "touch_tcon:u10" -to "DE2_70|touch_tcon:u10" -section_id "touch_tcon:u10"
 set_instance_assignment -name LL_MEMBER_OF "lcd_3wire_config:u11" -to "DE2_70|lcd_3wire_config:u11" -section_id "lcd_3wire_config:u11"
-set_global_assignment -name VERILOG_FILE CCD_Capture.v
-set_global_assignment -name VERILOG_FILE touch_tcon.v
-set_global_assignment -name VERILOG_FILE Arbitrator.v
-set_global_assignment -name SDC_FILE DE2_70.sdc
-set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/command.v
-set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/control_interface.v
-set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/sdr_data_path.v
-set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_Control_4Port.v
-set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_FIFO.v
-set_global_assignment -name SOURCE_FILE Sdram_Control_4Port/Sdram_Params.h
-set_global_assignment -name VERILOG_FILE RAW2RGB.v
-set_global_assignment -name VERILOG_FILE RGB2GRAY.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -5,7 +5,7 @@ module HistogramDisplayer(
 	input [15:0] Y_Cont,
 	input [19:0] iHistoValue,
 	output [7:0] oHistoAddr,
-	output [7:0] oPixel);
+	output reg [7:0] oPixel);
 
 /* Pull in the histogram value based on Y_Cont from the RAM */
 assign oHistoAddr = Y_Cont;

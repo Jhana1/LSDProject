@@ -527,16 +527,38 @@ RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
               .oGray(GRAY_DATA),
               .oDval(GRAY_VAL)				
               );
-
 				  
+wire [17:0] histo_value;
+wire [7:0] histo_pixel;
+
+
+Histogram histo (
+    .iClk(CCD_PIXCLK),
+    .iRst_n(!CCD_FVAL),
+    .iClearRam(!GRAY_VAL),
+    .iGray(GRAY_DATA),
+    .iValid(GRAY_VAL),
+    .oQ(histo_value)
+	 );		
+	 
+HistogramDisplayer histo_disp(
+	.iClk(CCD_PIXCLK),
+	.iRst_n(DLY_RST_1),
+	.X_Cont(X_Cont),
+	.Y_Cont(Y_Cont),
+	.iHistoValue(histo_value),
+	.oHistoAddr(histo_gray_in),
+	.oPixel(histo_pixel));
+
+
 Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						 .iRst_n(DLY_RST_1),
 						// Select Input
 						.iSelect(iSW[3:1]),
 						
 						// Coordinates
-						.iX_cont(X_Cont),
-						.iY_cont(Y_Cont),
+						.iX_Cont(X_Cont),
+						.iY_Cont(Y_Cont),
 						
 						// RGB Inputs
 						.iRGB_valid(sCCD_DVAL),
@@ -547,11 +569,11 @@ Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						// GRAY Inputs
 						.iGray_valid(GRAY_VAL),
 						.iGray(GRAY_DATA),
-						/*
+					
 						// Histogram Inputs
-						input iHist_valid,
-						input [7:0] iHist,
-						
+						//.iHist_valid(),
+						.iHist(histo_pixel),
+						/*
 						// Threshold Input
 						input iThresh_valid,
 						input [7:0] iThresh,*/
@@ -612,8 +634,8 @@ assign CCD_MCLK = rClk[0];
 //     Camera data is loaded into the FIFO Write Side 1 and read out by the LCD display driver.
 Sdram_Control_4Port	u7	(	//	HOST Side
 						    .REF_CLK(iCLK_50),
-						    //.RESET_N(1'b1),				// LK: Reset the controller with 0 here.  LK has altered the Sdram_Control_4Port 
-							 .RESET_N(1'b1),
+						    .RESET_N(1'b1),				// LK: Reset the controller with 0 here.  LK has altered the Sdram_Control_4Port 
+							 //.RESET_N(iSW[10]),
 														// module to reload the buffer size WR1_MAX_ADDR when this reset is activated.
 							.CLK(sdram_ctrl_clk),		// Controller clock running @ 150 MHz
 
@@ -629,7 +651,7 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 							.WR1_CLK(CCD_PIXCLK),							// LK: Camera clock for writing data
 
 							//	FIFO Read Side 1
-						    .RD1_DATA(Read_DATA1),							// LK: Green and Blue components.
+						   .RD1_DATA(Read_DATA1),							// LK: Green and Blue components.
 				        	.RD1(Read),										// LK: When 1 data is read out of memory on next RD1_CLK edge 
 				        	.RD1_ADDR(0),
 							.RD1_MAX_ADDR(800*480),
@@ -655,6 +677,7 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 Sdram_Control_4Port	u8	(	//	HOST Side
 						    .REF_CLK(iCLK_50),
 						    .RESET_N(1'b1),
+							 //.RESET_N(iSW[10]),
 							.CLK(sdram_ctrl_clk),
 							
 							//	FIFO Write Side 1

@@ -4,8 +4,8 @@ module Arbitrator(input iClk,
 						// Select Input
 						input [2:0] iSelect,
 						
-						input [15:0] iX_cont,
-						input [15:0] iY_cont,
+						input [15:0] iX_Cont,
+						input [15:0] iY_Cont,
 						
 						// RGB Inputs
 						input iRGB_valid,
@@ -184,7 +184,7 @@ begin
 			end
 		5: begin
 				if (rRGB_valid) begin
-					if (iX_cont < 200) begin
+					if (iX_Cont < 200) begin
 						disp_R <= 0;
 						disp_G <= -1;
 						disp_B <= 0;
