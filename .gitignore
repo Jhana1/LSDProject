@@ -42,6 +42,7 @@ Software/gtest/*
 Software/.kateproject.d/*
 Software/audio/*
 Software/tests/reports
+*/db/*
 .directory
 *.db_info
 *.tdf
