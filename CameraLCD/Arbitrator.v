@@ -4,6 +4,9 @@ module Arbitrator(input iClk,
 						// Select Input
 						input [2:0] iSelect,
 						
+						input [15:0] iX_cont,
+						input [15:0] iY_cont,
+						
 						// RGB Inputs
 						input iRGB_valid,
 						input [11:0] iRGB_R,
@@ -75,6 +78,7 @@ begin
 		oWr1_valid <= 0;
 		oWr2_valid <= 0;
 		
+		
 		// RGB Reset
 		rRGB_R     <= 0;
 		rRGB_G 	  <= 0;
@@ -116,8 +120,7 @@ begin
 		
 		case (rSelect)
 		1: begin // RGB Select
-				if (rRGB_valid)
-				begin
+				if (rRGB_valid) begin
 					disp_R 	  <= rRGB_R;
 					disp_G 	  <= rRGB_G;
 					disp_B 	  <= rRGB_B;
@@ -179,10 +182,28 @@ begin
 					oWr2_valid <= 0;
 				end
 			end
+		5: begin
+				if (rRGB_valid) begin
+					if (iX_cont < 200) begin
+						disp_R <= 0;
+						disp_G <= -1;
+						disp_B <= 0;
+					end else begin 
+						disp_R <= 0;
+						disp_G <= 0;
+						disp_B <= -1;
+					end
+					oWr1_valid <= 1;
+					oWr2_valid <= 1;
+				end else begin
+					oWr1_valid <= 0;
+					oWr2_valid <= 0;
+				end
+			end
 		default: begin
-				disp_R 		  <= 255 << 4;
-				disp_G		  <= 0;
-				disp_B		  <= 0;
+				disp_R 		  <= -1;
+				disp_G		  <= -1;
+				disp_B		  <= -1;
 				oWr1_valid 	  <= 1;
 				oWr2_valid 	  <= 1;
 			end
