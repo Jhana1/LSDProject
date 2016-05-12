@@ -527,12 +527,17 @@ RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
               .oGray(GRAY_DATA),
               .oDval(GRAY_VAL)				
               );
-						
+
+				  
 Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						 .iRst_n(DLY_RST_1),
-						 //.iFval(rCCD_FVAL),
 						// Select Input
-						.iSelect(iSW[15:13]),
+						.iSelect(iSW[3:1]),
+						
+						// Coordinates
+						.iX_cont(X_Cont),
+						.iY_cont(Y_Cont),
+						
 						// RGB Inputs
 						.iRGB_valid(sCCD_DVAL),
 						.iRGB_R(sCCD_R),
@@ -542,9 +547,9 @@ Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						// GRAY Inputs
 						.iGray_valid(GRAY_VAL),
 						.iGray(GRAY_DATA),
-						
+						/*
 						// Histogram Inputs
-						/*input iHist_valid,
+						input iHist_valid,
 						input [7:0] iHist,
 						
 						// Threshold Input
@@ -552,15 +557,34 @@ Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						input [7:0] iThresh,*/
 						
 						// Outputs
-						.oWr1_valid(wr1_valid),
-						.oWr2_valid(wr2_valid),
+						//.oWr1_valid(wr1_valid),
+						//.oWr2_valid(wr2_valid),
 						.oWr1_data(wr1_data),
 						.oWr2_data(wr2_data)
 );
 
+
+
 wire [15:0] wr1_data, wr2_data;
-wire wr1_valid, wr2_valid;
-						
+//reg [15:0] wr1_data, wr2_data;
+//wire wr1_valid, wr2_valid;
+
+assign wr1_valid = sCCD_DVAL;
+assign wr2_valid = sCCD_DVAL;
+/*
+always @(posedge CCD_PIXCLK) begin
+	if (X_Cont < 200) begin
+		wr1_data <= -1;
+		wr2_data <= -1;
+	end else begin
+		wr1_data <= 0;
+		wr2_data <= 0;
+	end
+end*/
+
+//wire [15:0] wr1_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 15'b111111111111111:15'b0): {sCCD_G[11:7],	 sCCD_B[11:2]};
+//wire [15:0] wr2_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 10'b111111111111111:15'b0): {sCCD_G[6:2],    sCCD_R[11:2]};
+
 						
 // LK: takes 32 bit iDIG input and displays this on 8 seven segment displays oSEG0..7
 SEG7_LUT_8 			u4	(	.oSEG0(oHEX0_D),.oSEG1(oHEX1_D),
@@ -583,14 +607,13 @@ sdram_pll 			u6	(	.inclk0(iCLK_50_3),
 
 assign CCD_MCLK = rClk[0];
 
-//wire [15:0] wr1_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 15'b111111111111111:15'b0): {sCCD_G[11:7],	 sCCD_B[11:2]};
-//wire [15:0] wr2_data = iSW[1]? (X_Cont[4]/*^ Frame_Cont[0]*/? 10'b111111111111111:15'b0): {sCCD_G[6:2],    sCCD_R[11:2]};
 
 // LK: The SDRAM is used as a frame buffer using two of these Sdram_Control_4Port modules -  one for each SDRAM chip on the DE2-70 board.
 //     Camera data is loaded into the FIFO Write Side 1 and read out by the LCD display driver.
 Sdram_Control_4Port	u7	(	//	HOST Side
 						    .REF_CLK(iCLK_50),
-						    .RESET_N(1'b1),				// LK: Reset the controller with 0 here.  LK has altered the Sdram_Control_4Port 
+						    //.RESET_N(1'b1),				// LK: Reset the controller with 0 here.  LK has altered the Sdram_Control_4Port 
+							 .RESET_N(1'b1),
 														// module to reload the buffer size WR1_MAX_ADDR when this reset is activated.
 							.CLK(sdram_ctrl_clk),		// Controller clock running @ 150 MHz
 
