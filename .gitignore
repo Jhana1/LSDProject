@@ -44,3 +44,4 @@ Software/audio/*
 Software/tests/reports
 .directory
 *.db_info
+*.tdf

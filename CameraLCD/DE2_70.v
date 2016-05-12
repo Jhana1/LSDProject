@@ -530,7 +530,7 @@ RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
 						
 Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						 .iRst_n(DLY_RST_1),
-						 .iFval(rCCD_FVAL),
+						 //.iFval(rCCD_FVAL),
 						// Select Input
 						.iSelect(iSW[15:13]),
 						// RGB Inputs
