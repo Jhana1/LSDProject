@@ -20,7 +20,6 @@
 *.xref
 *.bak*
 *.rpt
-*.do
 *.xrf
 *.vo
 *.sft
@@ -38,5 +37,6 @@
 */incremental_db
 */output_files/
 */rtl_work/*
-*/modelsim/w*
+Histogram/simulation/modelsim/w*
+
 .directory
