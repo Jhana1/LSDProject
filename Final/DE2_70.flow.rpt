@@ -1,5 +1,5 @@
 Flow report for DE2_70
-Wed May 18 12:54:34 2016
+Wed May 18 17:31:54 2016
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -40,17 +40,17 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Flow Summary                                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Flow Status                        ; Successful - Wed May 18 12:54:30 2016            ;
+; Flow Status                        ; Successful - Wed May 18 17:31:50 2016            ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; DE2_70                                           ;
 ; Top-level Entity Name              ; DE2_70                                           ;
 ; Family                             ; Cyclone II                                       ;
 ; Device                             ; EP2C70F896C6                                     ;
 ; Timing Models                      ; Final                                            ;
-; Total logic elements               ; 2,153 / 68,416 ( 3 % )                           ;
-;     Total combinational functions  ; 1,849 / 68,416 ( 3 % )                           ;
-;     Dedicated logic registers      ; 1,417 / 68,416 ( 2 % )                           ;
-; Total registers                    ; 1487                                             ;
+; Total logic elements               ; 2,157 / 68,416 ( 3 % )                           ;
+;     Total combinational functions  ; 1,884 / 68,416 ( 3 % )                           ;
+;     Dedicated logic registers      ; 1,399 / 68,416 ( 2 % )                           ;
+; Total registers                    ; 1469                                             ;
 ; Total pins                         ; 530 / 622 ( 85 % )                               ;
 ; Total virtual pins                 ; 0                                                ;
 ; Total memory bits                  ; 73,784 / 1,152,000 ( 6 % )                       ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/18/2016 12:54:00 ;
+; Start date & time ; 05/18/2016 17:31:20 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_70              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+--------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                          ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+--------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 57277343980317.146354004026888 ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 57277343971634.146355668059688 ; --            ; --          ; --         ;
 ; ENABLE_SIGNALTAP                    ; Off                            ; --            ; --          ; --         ;
 ; NUM_PARALLEL_PROCESSORS             ; Default                        ; 1             ; --          ; --         ;
 ; PARTITION_COLOR                     ; 2147039                        ; --            ; --          ; Top        ;
@@ -93,11 +93,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:07     ; 1.0                     ; 492 MB              ; 00:00:06                           ;
-; Fitter                    ; 00:00:19     ; 1.7                     ; 1174 MB             ; 00:00:27                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 477 MB              ; 00:00:03                           ;
+; Analysis & Synthesis      ; 00:00:06     ; 1.0                     ; 496 MB              ; 00:00:06                           ;
+; Fitter                    ; 00:00:18     ; 2.4                     ; 1192 MB             ; 00:00:26                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 469 MB              ; 00:00:03                           ;
 ; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 489 MB              ; 00:00:02                           ;
-; Total                     ; 00:00:32     ; --                      ; --                  ; 00:00:38                           ;
+; Total                     ; 00:00:30     ; --                      ; --                  ; 00:00:37                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -106,10 +106,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; 035-103-025WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; 035-103-025WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; 035-103-025WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; 035-103-025WL    ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 

@@ -530,71 +530,50 @@ RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
               .oGray(GRAY_DATA),
               .oDval(GRAY_VAL)				
               );
-				  
-wire [17:0] histo_value;
+
+	
+/* Histogram Ram and displayer */
+wire [19:0] display_hist_q;
+wire [7:0] display_hist_rda;
 wire [7:0] histo_pixel;
 
-wire ram_select;
-wire [19:0] ram1_data, ram2_data, ram1_q, ram2_q, histo_data, histo_q, display_q;
-wire [7:0] ram1_rda, ram2_rda, ram1_wra, ram2_wra, histo_rda, histo_wra, display_rda;
-wire ram1_we, ram2_we, histo_we;
-
-assign histo_data = ram_select ? ram1_data : ram2_data;
-assign histo_q = ram_select ? ram1_q : ram2_q;
-assign histo_rda = ram_select ? ram1_rda : ram2_rda;
-assign histo_wra = ram_select ? ram1_wra : ram2_wra;
-assign histo_we = ram_select ? ram1_we : ram2_we;
-
-assign display_q  = ram_select ? ram2_q : ram1_q;
-assign display_rda = ram_select ? ram2_rda : ram1_rda;
-
-dual_port_ram ram1
-(
-	.data(ram1_data),
-	.read_addr(ram1_rda), 
-	.write_addr(ram1_wra),
-	.we(ram1_we), 
-	.clk(CCD_PIXCLK),
-	.q(ram1_q)
-);
-
-dual_port_ram ram2
-(
-	.data(ram2_data),
-	.read_addr(ram2_rda), 
-	.write_addr(ram2_wra),
-	.we(ram2_we), 
-	.clk(CCD_PIXCLK),
-	.q(ram2_q)
-);
-
-Histogram histo
-(
-    .iClk(CCD_PIXCLK),
-    .iRst_n(DLY_RST_1),
-    .iClearRam(1'b0),
-    .iGray(GRAY_DATA),
-    .iValid(GRAY_VAL),
-    
-    /* RAM I/O */
-    .oReadAddr(histo_rda), 
-    .oWriteAddr(histo_wra),
-    .oWriteEnable(histo_we),
-    .oDataOut(histo_data),
-    .iDataIn(histo_q)
-);
-
-
+HistogramRam hist_ram (.iClk(CCD_PIXCLK), 
+						.iReadAddress(display_hist_rda), 
+						.oQ(display_hist_q));
+						
 HistogramDisplayer histo_display(
 	.iClk(CCD_PIXCLK),
-	.iRst_n(DLY_RST_1),
 	.X_Cont(X_Cont),
 	.Y_Cont(Y_Cont),
-	.iHistoValue(display_q),
-	.oHistoAddr(display_rda),
+	.iHistoValue(display_hist_q),
+	.oHistoAddr(display_hist_rda),
 	.oPixel(histo_pixel));
+	
+/* Cumulative Histogram Ram and displayer */
+wire [7:0] display_cumh_rda;
+wire [19:0] display_cumh_q;
+wire [7:0] cumh_pixel;
 
-
+CumHistogramRam cumh_ram (.iClk(CCD_PIXCLK), 
+					   .iReadAddress(display_cumh_rda), 
+                  .oQ(display_cumh_q)); 
+						
+HistogramDisplayer cumh_display(
+	.iClk(CCD_PIXCLK),
+	.X_Cont(X_Cont),
+	.Y_Cont(Y_Cont),
+	.iHistoValue(display_cumh_q),
+	.oHistoAddr(display_cumh_rda),
+	.oPixel(cumh_pixel));
+	
+wire [7:0] thresh_pixel;
+wire [7:0] cumulative_histo_threshold = 100;
+Thresholder thresher (.iClk(CCD_PIXCLK), 
+							 .iGray(GRAY_DATA), 
+							 .iThreshold(cumulative_histo_threshold), 
+							 .oPixel(thresh_pixel));
+							 
+	
 Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						 .iRst_n(DLY_RST_1),
 						// Select Input
@@ -603,37 +582,37 @@ Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						// Coordinates
 						.iX_Cont(X_Cont),
 						.iY_Cont(Y_Cont),
+						.iValid(sCCD_DVAL),
 						
 						// RGB Inputs
-						.iRGB_valid(sCCD_DVAL),
 						.iRGB_R(sCCD_R),
 						.iRGB_G(sCCD_G),
 						.iRGB_B(sCCD_B),
 						
 						// GRAY Inputs
-						.iGray_valid(GRAY_VAL),
 						.iGray(GRAY_DATA),
 					
 						// Histogram Inputs
-						//.iHist_valid(),
 						.iHist(histo_pixel),
-						/*
+						.iThresholdLevel(cumulative_histo_threshold),
+						
+						// CUmulative inputs
+						.iCumHist(cumh_pixel),
+						
 						// Threshold Input
-						input iThresh_valid,
-						input [7:0] iThresh,*/
+						.iThresh(thresh_pixel),
 						
 						// Outputs
-						//.oWr1_valid(wr1_valid),
-						//.oWr2_valid(wr2_valid),
 						.oWr1_data(wr1_data),
 						.oWr2_data(wr2_data)
 );
 
+/*************************************************************
+ *****************   END OF OUR STUFF
+ ******************
+ *************************************************************/
 
 wire [15:0] wr1_data, wr2_data;
-//reg [15:0] wr1_data, wr2_data;
-//wire wr1_valid, wr2_valid;
-
 assign wr1_valid = sCCD_DVAL;
 assign wr2_valid = sCCD_DVAL;
 						
