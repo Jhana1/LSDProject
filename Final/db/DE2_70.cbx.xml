@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="DE2_70">
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u8|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u8|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u8|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|RAW2RGB:u3|Line_Buffer:L1|altshift_taps:altshift_taps_component" CBX_FILE_NAME="shift_taps_0jn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_70|Sdram_Control_4Port:u8|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_m2o1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

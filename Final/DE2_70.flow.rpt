@@ -1,0 +1,125 @@
+Flow report for DE2_70
+Wed May 18 12:54:34 2016
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------+
+; Flow Summary                                                                          ;
++------------------------------------+--------------------------------------------------+
+; Flow Status                        ; Successful - Wed May 18 12:54:30 2016            ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
+; Revision Name                      ; DE2_70                                           ;
+; Top-level Entity Name              ; DE2_70                                           ;
+; Family                             ; Cyclone II                                       ;
+; Device                             ; EP2C70F896C6                                     ;
+; Timing Models                      ; Final                                            ;
+; Total logic elements               ; 2,153 / 68,416 ( 3 % )                           ;
+;     Total combinational functions  ; 1,849 / 68,416 ( 3 % )                           ;
+;     Dedicated logic registers      ; 1,417 / 68,416 ( 2 % )                           ;
+; Total registers                    ; 1487                                             ;
+; Total pins                         ; 530 / 622 ( 85 % )                               ;
+; Total virtual pins                 ; 0                                                ;
+; Total memory bits                  ; 73,784 / 1,152,000 ( 6 % )                       ;
+; Embedded Multiplier 9-bit elements ; 0 / 300 ( 0 % )                                  ;
+; Total PLLs                         ; 2 / 4 ( 50 % )                                   ;
++------------------------------------+--------------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 05/18/2016 12:54:00 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; DE2_70              ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                ;
++-------------------------------------+--------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                          ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+--------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 57277343980317.146354004026888 ; --            ; --          ; --         ;
+; ENABLE_SIGNALTAP                    ; Off                            ; --            ; --          ; --         ;
+; NUM_PARALLEL_PROCESSORS             ; Default                        ; 1             ; --          ; --         ;
+; PARTITION_COLOR                     ; 2147039                        ; --            ; --          ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING          ; --            ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                         ; --            ; --          ; Top        ;
+; SEARCH_PATH                         ; Sdram_Control_4Port/           ; --            ; --          ; --         ;
+; SMART_RECOMPILE                     ; On                             ; Off           ; --          ; --         ;
+; TIMEQUEST_DO_REPORT_TIMING          ; On                             ; Off           ; --          ; --         ;
+; USE_SIGNALTAP_FILE                  ; stp1.stp                       ; --            ; --          ; --         ;
++-------------------------------------+--------------------------------+---------------+-------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:07     ; 1.0                     ; 492 MB              ; 00:00:06                           ;
+; Fitter                    ; 00:00:19     ; 1.7                     ; 1174 MB             ; 00:00:27                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 477 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 489 MB              ; 00:00:02                           ;
+; Total                     ; 00:00:32     ; --                      ; --                  ; 00:00:38                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                        ;
++---------------------------+------------------+-----------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
++---------------------------+------------------+-----------+------------+----------------+
+; Analysis & Synthesis      ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; 035-103-019WL    ; Windows 7 ; 6.1        ; x86_64         ;
++---------------------------+------------------+-----------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off DE2_70 -c DE2_70
+quartus_fit --read_settings_files=off --write_settings_files=off DE2_70 -c DE2_70
+quartus_asm --read_settings_files=off --write_settings_files=off DE2_70 -c DE2_70
+quartus_sta DE2_70 -c DE2_70
+
+
+
