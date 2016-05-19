@@ -482,6 +482,7 @@ Reset_Delay			u1	(	.iCLK(iCLK_50),
 
 CCD_Capture			u2	(	.oDATA(mCCD_DATA),
 							.oDVAL(mCCD_DVAL),
+							.oFVAL(mCCD_FVAL),
 							.oX_Cont(X_Cont),
 							.oY_Cont(Y_Cont),
 							.oFrame_Cont(Frame_Cont),
@@ -537,9 +538,28 @@ wire [19:0] display_hist_q;
 wire [7:0] display_hist_rda;
 wire [7:0] histo_pixel;
 
-HistogramRam hist_ram (.iClk(CCD_PIXCLK), 
+/*HistogramRam hist_ram (.iClk(CCD_PIXCLK), 
 						.iReadAddress(display_hist_rda), 
-						.oQ(display_hist_q));
+						.oQ(display_hist_q));*/
+						
+Total_Histogram T1
+(
+    .iClk(CCD_PIXCLK),
+    .iRst_n(DLY_RST_1),
+    .iGray(GRAY_DATA),
+	 .iGrayValid(GRAY_VAL),
+	 .iFvalid(mCCD_FVAL),
+	 
+	 .iReadGray(display_hist_rda),
+	 
+	 .oGray(),
+    .oGrayHisto(display_hist_q),
+	 
+	 .oGrayCumHisto(display_cumh_q),
+	 
+	 .oThresh(cumulative_histo_threshold),
+	 .oDone()
+);					
 						
 HistogramDisplayer histo_display(
 	.iClk(CCD_PIXCLK),
@@ -549,25 +569,26 @@ HistogramDisplayer histo_display(
 	.oHistoAddr(display_hist_rda),
 	.oPixel(histo_pixel));
 	
-/* Cumulative Histogram Ram and displayer */
-wire [7:0] display_cumh_rda;
-wire [19:0] display_cumh_q;
-wire [7:0] cumh_pixel;
-
-CumHistogramRam cumh_ram (.iClk(CCD_PIXCLK), 
-					   .iReadAddress(display_cumh_rda), 
-                  .oQ(display_cumh_q)); 
-						
 HistogramDisplayer cumh_display(
 	.iClk(CCD_PIXCLK),
 	.X_Cont(X_Cont),
 	.Y_Cont(Y_Cont),
 	.iHistoValue(display_cumh_q),
-	.oHistoAddr(display_cumh_rda),
 	.oPixel(cumh_pixel));
 	
+/* Cumulative Histogram Ram and displayer */
+wire [7:0] display_cumh_rda;
+wire [19:0] display_cumh_q;
+wire [7:0] cumh_pixel;
+
+/*CumHistogramRam cumh_ram (.iClk(CCD_PIXCLK), 
+					   .iReadAddress(display_cumh_rda), 
+                  .oQ(display_cumh_q)); 
+*/						
+
+	
 wire [7:0] thresh_pixel;
-wire [7:0] cumulative_histo_threshold = 100;
+wire [7:0] cumulative_histo_threshold;
 Thresholder thresher (.iClk(CCD_PIXCLK), 
 							 .iGray(GRAY_DATA), 
 							 .iThreshold(cumulative_histo_threshold), 

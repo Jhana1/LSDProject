@@ -45,6 +45,7 @@ module CCD_Capture(	oDATA,
 					oX_Cont,
 					oY_Cont,
 					oFrame_Cont,
+					oFVAL,
 					iDATA,
 					iFVAL,
 					iLVAL,
@@ -66,6 +67,7 @@ output	[15:0]	oX_Cont;
 output	[15:0]	oY_Cont;
 output	[31:0]	oFrame_Cont;
 output			oDVAL;
+output 			oFVAL;
 reg				Pre_FVAL;
 reg				mCCD_FVAL;
 reg				mCCD_LVAL;
@@ -82,6 +84,7 @@ assign	oY_Cont		=	Y_Cont;
 assign	oFrame_Cont	=	Frame_Cont;
 assign	oDATA		=	mCCD_DATA;
 assign	oDVAL		=	mCCD_FVAL&mCCD_LVAL;
+assign   oFVAL    =  mCCD_FVAL;
 
 always@(posedge iCLK or negedge iRST)
 begin

@@ -10,7 +10,7 @@ module HistogramDisplayer(
 assign oHistoAddr = (255 - Y_Cont);
 
 always @(posedge iClk) begin
-	if ((800 - X_Cont) < iHistoValue && (255 - Y_Cont) < 255) begin
+	if ((800 - X_Cont) < (iHistoValue>>8) && (255 - Y_Cont) < 255) begin
 		oPixel <= 255;
 	end else begin
 		oPixel <= 0;
