@@ -5,6 +5,8 @@ module Total_Histogram
     input [7:0] iGray,
 	 input iGrayValid,
 	 input iFvalid,
+	 input [15:0] iX_Cont,
+	 input [15:0] iY_Cont,
 	 
 	 input [7:0] iReadGray,
 	 // Histogram Outputs
@@ -53,6 +55,7 @@ wire [7:0] thresh;
 reg  [7:0] rThresh;
 wire Hist1We, Hist2We, writeEnable, cumDone, hDone;
 
+
 reg [19:0] Hist2RDataR, Hist1RDataR, ReadCumHistDataR;
 
 
@@ -75,8 +78,7 @@ Histogram h1
     .iGray(hGray),
     .iValid(hInc),
 	 .oGray(gray),
-    .oGrayHisto(grayHisto),
-	 .oDone(hDone)
+    .oGrayHisto(grayHisto)
 );
 
 CumulativeHistogram c1
@@ -184,12 +186,13 @@ begin
 		hInc 		<= iGrayValid;
 		hGrayR 	<= iGray;
 		// When Fvalid is Low, go to Cumulative
-		state 	<= (!iFvalid && hDone) ? 3 : 2;
+		state 	<= (!iFvalid) ? 3 : 2;
 	end
 	
 	// State 3 - Calculate Cumulative Histogram
 	// Should do this on its own, just need to wait for it
 	if (state == 3) begin
+		hInc     <= 0;
 		substate <= 1;
 		startCH 	<= 1;
 		if (substate == 1)

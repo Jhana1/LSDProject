@@ -1,37 +1,45 @@
 module Arbitrator(input iClk,
 						input iRst_n,
+						input iFval,
 						
 						// Select Input
 						input [2:0] iSelect,
 						
 						input [15:0] iX_Cont,
 						input [15:0] iY_Cont,
-						input iValid,
+						//input iValid,
 						
 						// RGB Inputs
 						input [11:0] iRGB_R,
 						input [11:0] iRGB_G,
 						input [11:0] iRGB_B,
+						input iRGB_Valid,
 						
 						// GRAY Inputs
 						input [7:0] iGray,
+						input iGray_Valid,
 						
 						// Histogram Inputs
 						input [7:0] iHist,
 						input [7:0] iThresholdLevel,
+						input iHist_Valid,
 						
 						// Threshold Input
 						input [7:0] iThresh,
+						input iThresh_Valid,
 						
 						input [7:0] iCumHist,
 						
 						// Outputs
 						output [15:0] oWr1_data,
-						output [15:0] oWr2_data						
+						output [15:0] oWr2_data,						
+						
+						output reg oWr_data_valid
 );
 
 // Output Registers
 reg [11:0] disp_R, disp_G, disp_B;
+reg [2:0] rSelect;
 
 // TOUCH TCON DATA LOCATION
 // RED      =  Wr1_DATA[9:2]
@@ -45,6 +53,7 @@ assign oWr2_data = {disp_G[6:2], disp_R[11:2]};
 
 always @(posedge iClk)
 begin
+	rSelect <= (!iFval) ? iSelect : rSelect;
 	if (!iRst_n)
 	begin
 		// General Reset
@@ -53,32 +62,36 @@ begin
 		disp_B	  <= 0;
 	end else begin	
 		
-		case (iSelect)
+		case (rSelect)
 		1: begin // RGB Select
-				if (iValid) begin
+				if (iRGB_Valid) begin
 					disp_R 	  <= iRGB_R;
 					disp_G 	  <= iRGB_G;
 					disp_B 	  <= iRGB_B;
+					oWr_data_valid <= 1;
 				end else begin
 					disp_R	  <= 0;
 					disp_G	  <= 0;
 					disp_B	  <= 0;
+					oWr_data_valid <= 0;
 				end
 			end
 		2: begin // GRAY Select
-				if (iValid)
+				if (iGray_Valid)
 				begin
 					disp_R 	  <= iGray << 4;
 					disp_G 	  <= iGray << 4;
 					disp_B 	  <= iGray << 4;
+					oWr_data_valid <= 1;
 				end else begin
 					disp_R 	  <= 0;
 					disp_G 	  <= 0;
 					disp_B 	  <= 0;
+					oWr_data_valid <= 0;
 				end
 			end
 		3: begin // Histogram Select
-				if (iValid)
+				if (iHist_Valid)
 				begin
 					if ((255 - iY_Cont) == iThresholdLevel) begin
 						disp_R <= -1;
@@ -89,40 +102,47 @@ begin
 						disp_G 	  <= iHist << 4;
 						disp_B	  <= iHist << 4;
 					end
+					oWr_data_valid <= 1;
 				end else begin
 					disp_R 	  <= 0;
 					disp_G	  <= 0;
 					disp_B 	  <= 0;
+					oWr_data_valid <= 0;
 				end
 			end
 		4: begin // Threshold select
-				if (iValid)
+				if (iThresh_Valid)
 				begin
 					disp_R 	  <= iThresh << 4;
 					disp_G 	  <= iThresh << 4;
 					disp_B 	  <= iThresh << 4;
+					oWr_data_valid <= 1;
 				end else begin
 					disp_R     <= 0;
 					disp_G	  <= 0;
 					disp_B     <= 0;
+					oWr_data_valid <= 0;
 				end
 			end
 		5: begin // Display cumulative histogram
-				if (iValid)
+				if (iHist_Valid)
 				begin
 					disp_R     <= iCumHist << 4;
 					disp_G 	  <= iCumHist << 4;
 					disp_B	  <= iCumHist << 4;
+					oWr_data_valid <= 1;
 				end else begin
 					disp_R 	  <= 0;
 					disp_G	  <= 0;
 					disp_B 	  <= 0;
+					oWr_data_valid <= 0;
 				end
 			end
 		default: begin
 				disp_R 		  <= -1;
-				disp_G		  <= -1;
-				disp_B		  <= -1;
+				disp_G		  <= 0;
+				disp_B		  <= 0;
+				oWr_data_valid <= iRGB_Valid;
 			end
 		endcase
 	end

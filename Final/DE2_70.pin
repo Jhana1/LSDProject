@@ -758,10 +758,10 @@ oHEX4_D[0]                   : P1        : output : 3.3-V LVTTL       :         
 oHEX4_D[1]                   : P2        : output : 3.3-V LVTTL       :         : 2         : Y              
 oHEX4_D[2]                   : P3        : output : 3.3-V LVTTL       :         : 2         : Y              
 oHEX3_D[1]                   : P4        : output : 3.3-V LVTTL       :         : 2         : Y              
-TCK                          : P5        : input  :                   :         : 2         :                
+altera_reserved_tck          : P5        : input  : 3.3-V LVTTL       :         : 2         : N              
 oHEX3_D[0]                   : P6        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : P7        :        :                   :         : 2         :                
-TDI                          : P8        : input  :                   :         : 2         :                
+altera_reserved_tdi          : P8        : input  : 3.3-V LVTTL       :         : 2         : N              
 oDRAM1_CS_N                  : P9        : output : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : P10       : gnd    :                   :         :           :                
 VCCINT                       : P11       : power  :                   : 1.2V    :           :                
@@ -787,10 +787,10 @@ GPIO_1[31]                   : P30       : bidir  : 3.3-V LVTTL       :         
 VCCIO2                       : R1        : power  :                   : 3.3V    : 2         :                
 GND+                         : R2        :        :                   :         : 2         :                
 iCLK_50_4                    : R3        : input  : 3.3-V LVTTL       :         : 2         : Y              
-TDO                          : R4        : output :                   :         : 2         :                
+altera_reserved_tdo          : R4        : output : 3.3-V LVTTL       :         : 2         : N              
 nCONFIG                      : R5        :        :                   :         : 2         :                
 nCE                          : R6        :        :                   :         : 2         :                
-TMS                          : R7        : input  :                   :         : 2         :                
+altera_reserved_tms          : R7        : input  : 3.3-V LVTTL       :         : 2         : N              
 DATA0                        : R8        : input  :                   :         : 2         :                
 DCLK                         : R9        :        :                   :         : 2         :                
 VCCIO2                       : R10       : power  :                   : 3.3V    : 2         :                

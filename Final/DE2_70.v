@@ -521,6 +521,8 @@ RAW2RGB				u3	(	.iCLK(CCD_PIXCLK),		//LK: pixel clock running at 60 MHz
 						
 wire GRAY_VAL;
 wire [7:0] GRAY_DATA;
+wire [15:0] gX_Cont, gY_Cont;
+
 
 RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
               .iReset_n(DLY_RST_1),
@@ -528,6 +530,10 @@ RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
               .iGreen(sCCD_G),
               .iBlue(sCCD_B),
               .iDval(sCCD_DVAL),
+				  .iX_Cont(X_Cont),
+				  .iY_Cont(Y_Cont),
+				  .oX_Cont(gX_Cont),
+				  .oY_Cont(gY_Cont),
               .oGray(GRAY_DATA),
               .oDval(GRAY_VAL)				
               );
@@ -549,7 +555,8 @@ Total_Histogram T1
     .iGray(GRAY_DATA),
 	 .iGrayValid(GRAY_VAL),
 	 .iFvalid(mCCD_FVAL),
-	 
+	 .iX_Cont(gX_Cont),
+	 .iY_Cont(gY_Cont),
 	 .iReadGray(display_hist_rda),
 	 
 	 .oGray(),
@@ -563,11 +570,13 @@ Total_Histogram T1
 						
 HistogramDisplayer histo_display(
 	.iClk(CCD_PIXCLK),
+	.iValid(sCCD_DVAL),
 	.X_Cont(X_Cont),
 	.Y_Cont(Y_Cont),
 	.iHistoValue(display_hist_q),
 	.oHistoAddr(display_hist_rda),
-	.oPixel(histo_pixel));
+	.oPixel(histo_pixel),
+	.oValid(HIST_VAL));
 	
 HistogramDisplayer cumh_display(
 	.iClk(CCD_PIXCLK),
@@ -590,8 +599,10 @@ wire [7:0] cumh_pixel;
 wire [7:0] thresh_pixel;
 wire [7:0] cumulative_histo_threshold;
 Thresholder thresher (.iClk(CCD_PIXCLK), 
-							 .iGray(GRAY_DATA), 
+							 .iGray(GRAY_DATA),
+							 .iValid(GRAY_VAL), 
 							 .iThreshold(cumulative_histo_threshold), 
+							 .oValid(THRESH_VAL),
 							 .oPixel(thresh_pixel));
 							 
 	
@@ -603,29 +614,33 @@ Arbitrator arbiter(.iClk(CCD_PIXCLK),
 						// Coordinates
 						.iX_Cont(X_Cont),
 						.iY_Cont(Y_Cont),
-						.iValid(sCCD_DVAL),
 						
 						// RGB Inputs
 						.iRGB_R(sCCD_R),
 						.iRGB_G(sCCD_G),
 						.iRGB_B(sCCD_B),
+						.iRGB_Valid(sCCD_DVAL),
 						
 						// GRAY Inputs
 						.iGray(GRAY_DATA),
-					
+						.iGray_Valid(GRAY_VAL),
+						
 						// Histogram Inputs
 						.iHist(histo_pixel),
 						.iThresholdLevel(cumulative_histo_threshold),
+						.iHist_Valid(HIST_VAL),
 						
 						// CUmulative inputs
 						.iCumHist(cumh_pixel),
 						
 						// Threshold Input
 						.iThresh(thresh_pixel),
+						.iThresh_Valid(THRESH_VAL),
 						
 						// Outputs
 						.oWr1_data(wr1_data),
-						.oWr2_data(wr2_data)
+						.oWr2_data(wr2_data),
+						.oWr_data_valid(WR_DATA_VAL)
 );
 
 /*************************************************************
@@ -673,7 +688,8 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr1_data),  // LK: Camera Green and Blue components.
 //						    .WR1_DATA({sCCD_G[11:7],	 sCCD_B[11:2]}),  // LK: Camera Green and Blue components.
-							.WR1(sCCD_DVAL),							  // LK: When 1 data is written to memory via FIFO on next WR1_CLK edge 
+							//.WR1(sCCD_DVAL),							  // LK: When 1 data is written to memory via FIFO on next WR1_CLK edge 
+							.WR1(WR_DATA_VAL),
 							.WR1_ADDR(0),									// LK: SDRAM start address - do not alter!
 							.WR1_MAX_ADDR(800*480),							//LK:  Buffer size.  Needs a RESET_N to take effect.
 							.WR1_LENGTH(9'h100),							// LK: SDRAM line length of 256 - do not alter!							
@@ -712,7 +728,8 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr2_data),
 //						    .WR1_DATA({sCCD_G[6:2], sCCD_R[11:2]}),
-							.WR1(sCCD_DVAL),
+							 .WR1(WR_DATA_VAL),
+							//.WR1(sCCD_DVAL),
 							.WR1_ADDR(0),
 							.WR1_MAX_ADDR(800*480),
 							.WR1_LENGTH(9'h100),
