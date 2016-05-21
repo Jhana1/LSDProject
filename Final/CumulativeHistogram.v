@@ -73,14 +73,14 @@ begin
             state 	<= 4;
         else
             state	   <= 3;
-        oAddrInHist  <= oAddrInHist + 1;
+        oAddrInHist  <= oAddrInHist + 8'b1;
         oDataOutCumH <= oDataOutCumH + iQInHist;
-        oAddrOutCumH <= oAddrInHist - 1;
+        oAddrOutCumH <= oAddrInHist - 8'b1;
         oWE    	   <= 1;
         if (oDataOutCumH > percentile)
             oThreshold <= (oThreshold) ? oThreshold : oAddrOutCumH;				
 		  oDataOutHist <= iQInHist;
-		  oAddrOutHist <= oAddrInHist - 1;
+		  oAddrOutHist <= oAddrInHist - 8'b1;
 		  
     end else if (state == 4) begin
         state 		   <= 5;
@@ -99,7 +99,7 @@ begin
         oAddrOutCumH <= 0;
         oDataOutCumH <= 0;
         oWE    	   <= 0;
-        oDone        <= (doneAck == 1) ? 0 : 1;
+        oDone        <= (doneAck == 1) ? 1'b0 : 1'b1;
     end
 end
 

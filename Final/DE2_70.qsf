@@ -930,10 +930,12 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LE
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_LOWORD=28823" -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_HIWORD=62629" -section_id auto_signaltap_0
 set_global_assignment -name VERILOG_FILE Fake_Dual_Port_Ram.v
+set_global_assignment -name VERILOG_FILE Total_Module.v
+set_global_assignment -name RTLV_GROUP_COMB_LOGIC_IN_CLOUD ON
+set_global_assignment -name SLD_FILE "C:/Users/James/Projects/ECE4063-Project/Final/stp1_auto_stripped.stp"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name SLD_FILE "C:/Users/James/Projects/ECE4063-Project/Final/stp1_auto_stripped.stp"

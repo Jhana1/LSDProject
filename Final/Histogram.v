@@ -13,26 +13,30 @@ module Histogram
   reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
   reg [DATA_WIDTH-1:0] tmp;
   reg [ADDR_WIDTH-1:0] GrayR, GrayD;
-  reg IncD, IncR, First;
+  reg [ADDR_WIDTH-1:0] ClearCount;
+  reg IncD, IncR;
   assign oGrayHisto = tmp;
   assign oGray = GrayD;
+  
   
   
   always @ (posedge iClk)
   begin
     // Reset
     tmp <= ram[GrayR];
-    
+    ClearCount <= 0;
     if (iClear) begin
-      ram[GrayR] <= 0;
+      ClearCount <= ClearCount + 8'b1;
+      ram[ClearCount] <= 0;
+      
     end
     else if (IncD) begin
       if (GrayD == GrayR) begin
-        tmp <= tmp + 1;
-        ram[GrayD] <= tmp + 1;
+        tmp <= tmp + 20'b1;
+        ram[GrayD] <= tmp + 20'b1;
       end 
       else begin
-        ram[GrayD] <= tmp + 1;
+        ram[GrayD] <= tmp + 20'b1;
       end
     end
   end

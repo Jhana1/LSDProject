@@ -513,140 +513,35 @@ RAW2RGB				u3	(	.iCLK(CCD_PIXCLK),		//LK: pixel clock running at 60 MHz
 							.iX_Cont(X_Cont),		// x camera pixel coordinate
 							.iY_Cont(Y_Cont)		// y camera pixel coordinate
 						);
-						
-						
-/*************************************************************
- * OUR STUFF **************
- *****************************/
-						
-wire GRAY_VAL;
-wire [7:0] GRAY_DATA;
-wire [15:0] gX_Cont, gY_Cont;
-
-
-RGB2GRAY r2g (.iCLK(CCD_PIXCLK),
-              .iReset_n(DLY_RST_1),
-              .iRed(sCCD_R),
-              .iGreen(sCCD_G),
-              .iBlue(sCCD_B),
-              .iDval(sCCD_DVAL),
-				  .iX_Cont(X_Cont),
-				  .iY_Cont(Y_Cont),
-				  .oX_Cont(gX_Cont),
-				  .oY_Cont(gY_Cont),
-              .oGray(GRAY_DATA),
-              .oDval(GRAY_VAL)				
-              );
-
-	
-/* Histogram Ram and displayer */
-wire [19:0] display_hist_q;
-wire [7:0] display_hist_rda;
-wire [7:0] histo_pixel;
-
-/*HistogramRam hist_ram (.iClk(CCD_PIXCLK), 
-						.iReadAddress(display_hist_rda), 
-						.oQ(display_hist_q));*/
-						
-Total_Histogram T1
-(
+//#######################################//						
+//--------------TOTAL MODULE------------//
+//#####################################//
+Total_Module TOTAL
+  (
+    // General
     .iClk(CCD_PIXCLK),
     .iRst_n(DLY_RST_1),
-    .iGray(GRAY_DATA),
-	 .iGrayValid(GRAY_VAL),
-	 .iFvalid(mCCD_FVAL),
-	 .iX_Cont(gX_Cont),
-	 .iY_Cont(gY_Cont),
-	 .iReadGray(display_hist_rda),
-	 
-	 .oGray(),
-    .oGrayHisto(display_hist_q),
-	 
-	 .oGrayCumHisto(display_cumh_q),
-	 
-	 .oThresh(cumulative_histo_threshold),
-	 .oDone()
-);					
-						
-HistogramDisplayer histo_display(
-	.iClk(CCD_PIXCLK),
-	.iValid(sCCD_DVAL),
-	.X_Cont(X_Cont),
-	.Y_Cont(Y_Cont),
-	.iHistoValue(display_hist_q),
-	.oHistoAddr(display_hist_rda),
-	.oPixel(histo_pixel),
-	.oValid(HIST_VAL));
-	
-HistogramDisplayer cumh_display(
-	.iClk(CCD_PIXCLK),
-	.X_Cont(X_Cont),
-	.Y_Cont(Y_Cont),
-	.iHistoValue(display_cumh_q),
-	.oPixel(cumh_pixel));
-	
-/* Cumulative Histogram Ram and displayer */
-wire [7:0] display_cumh_rda;
-wire [19:0] display_cumh_q;
-wire [7:0] cumh_pixel;
 
-/*CumHistogramRam cumh_ram (.iClk(CCD_PIXCLK), 
-					   .iReadAddress(display_cumh_rda), 
-                  .oQ(display_cumh_q)); 
-*/						
+    // Frame Related
+    .iX_Cont(X_Cont),
+    .iY_Cont(Y_Cont),
+    .iFval(mCCD_FVAL),
 
-	
-wire [7:0] thresh_pixel;
-wire [7:0] cumulative_histo_threshold;
-Thresholder thresher (.iClk(CCD_PIXCLK), 
-							 .iGray(GRAY_DATA),
-							 .iValid(GRAY_VAL), 
-							 .iThreshold(cumulative_histo_threshold), 
-							 .oValid(THRESH_VAL),
-							 .oPixel(thresh_pixel));
-							 
-	
-Arbitrator arbiter(.iClk(CCD_PIXCLK),
-						 .iRst_n(DLY_RST_1),
-						// Select Input
-						.iSelect(iSW[3:1]),
-						
-						// Coordinates
-						.iX_Cont(X_Cont),
-						.iY_Cont(Y_Cont),
-						
-						// RGB Inputs
-						.iRGB_R(sCCD_R),
-						.iRGB_G(sCCD_G),
-						.iRGB_B(sCCD_B),
-						.iRGB_Valid(sCCD_DVAL),
-						
-						// GRAY Inputs
-						.iGray(GRAY_DATA),
-						.iGray_Valid(GRAY_VAL),
-						
-						// Histogram Inputs
-						.iHist(histo_pixel),
-						.iThresholdLevel(cumulative_histo_threshold),
-						.iHist_Valid(HIST_VAL),
-						
-						// CUmulative inputs
-						.iCumHist(cumh_pixel),
-						
-						// Threshold Input
-						.iThresh(thresh_pixel),
-						.iThresh_Valid(THRESH_VAL),
-						
-						// Outputs
-						.oWr1_data(wr1_data),
-						.oWr2_data(wr2_data),
-						.oWr_data_valid(WR_DATA_VAL)
-);
+    // RGB
+    .iCCD_R(sCCD_R),
+    .iCCD_G(sCCD_G),
+    .iCCD_B(sCCD_B),
+    .iCCD_DVAL(sCCD_DVAL),
 
-/*************************************************************
- *****************   END OF OUR STUFF
- ******************
- *************************************************************/
+    // Display
+    .iDisplaySelect(iSW[3:0]),
+
+    // Output
+    .wr1_data(wr1_data),
+    .wr2_data(wr2_data),
+    .WR_DATA_VAL(WR_DATA_VAL)
+  );
+//////////////////				
 
 wire [15:0] wr1_data, wr2_data;
 assign wr1_valid = sCCD_DVAL;

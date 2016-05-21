@@ -1,8 +1,8 @@
 module Total_Histogram
 (
-    input iClk,
-    input iRst_n,
-    input [7:0] iGray,
+   input iClk,
+   input iRst_n,
+   input [7:0] iGray,
 	 input iGrayValid,
 	 input iFvalid,
 	 input [15:0] iX_Cont,
@@ -11,7 +11,7 @@ module Total_Histogram
 	 input [7:0] iReadGray,
 	 // Histogram Outputs
 	 output [7:0]  oGray,
-    output [19:0] oGrayHisto,
+   output [19:0] oGrayHisto,
 	 
 	 // Cumulative Histogram Outputs
 	 output [7:0]  oGrayCum,
@@ -44,9 +44,8 @@ wire [19:0] Hist1Q, Hist1RData;
 wire [19:0] Hist2Q, Hist2RData;
 
 // Cumulative Histogram
-wire [7:0] writeCumGrayAddr, readHistGrayAddr, ReadCumHistAddr;
+wire [7:0] writeCumGrayAddr, readHistGrayAddr;
 wire [19:0] writeCumGrayData, CumHistQ, ReadCumHistData;
-reg [7:0] ReadCumHistAddrR;
 // ===================================
 
 // General
@@ -60,8 +59,8 @@ reg [19:0] Hist2RDataR, Hist1RDataR, ReadCumHistDataR;
 
 
 assign hGray = (state != 3) ? hGrayR : readHistGrayAddr;
-assign Hist1We    = (even == 1) ? writeEnable : 0;
-assign Hist2We    = (even == 0) ? writeEnable : 0;
+assign Hist1We    = (even == 1) ? writeEnable : 1'b1;
+assign Hist2We    = (even == 0) ? writeEnable : 1'b1;
 
 assign oGrayHisto 	= (even == 1) ? Hist2RDataR : Hist1RDataR;
 assign oGrayCumHisto = ReadCumHistDataR;
@@ -73,11 +72,10 @@ assign oThresh       = rThresh;
 Histogram h1
 (
     .iClk(iClk),
-    .iRst_n(iRst_n),
-    .iClearRam(clearRam),
+    .iClear(clearRam),
     .iGray(hGray),
-    .iValid(hInc),
-	 .oGray(gray),
+    .iInc(hInc),
+	  .oGray(gray),
     .oGrayHisto(grayHisto)
 );
 
@@ -156,7 +154,7 @@ begin
 		if (substate == 1) begin
 			if (hGrayR == 255)
 				substate <= 2;
-			hGrayR <= hGrayR + 1;
+			hGrayR <= hGrayR + 8'b1;
 		// substate 2 - Don't Increment iGray
 		end else if (substate == 2) begin
 			clearRam <= 0;
@@ -212,7 +210,6 @@ end
 
 always @(posedge iClk)
 begin
-	ReadCumHistAddrR <= ReadCumHistAddr;
 	rReadGray 		  <= iReadGray;
 	Hist2RDataR		  <= Hist2RData;
 	Hist1RDataR		  <= Hist1RData;

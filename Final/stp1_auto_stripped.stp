@@ -1,4 +1,4 @@
-<session jtag_chain="USB-Blaster [USB-0]" jtag_device="@1: EP2C70 (0x020B60DD)" sof_file="DE2_70.sof">
+<session jtag_chain="Disabled" jtag_device="" sof_file="DE2_70.sof">
   <display_tree gui_logging_enabled="0">
     <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
   </display_tree>
