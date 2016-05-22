@@ -21,7 +21,7 @@ module Total_Module
     // Output
     output [15:0] wr1_data,
     output [15:0] wr2_data,
-    output [15:0] WR_DATA_VAL
+    output WR_DATA_VAL
   );
   /*************************************************************
  * OUR STUFF **************
@@ -31,6 +31,7 @@ module Total_Module
   wire GRAY_VAL;
   wire [7:0] GRAY_DATA;
   wire [15:0] gX_Cont, gY_Cont;
+  reg Rst_nR;
 
   /* Histogram Ram and displayer */
   wire [19:0] display_hist_q;
@@ -46,10 +47,15 @@ module Total_Module
   wire hist_val;
   wire thresh_val;
 
+  always @(posedge iClk)
+  begin
+    Rst_nR <= iRst_n;
+  end
+  
   // Module Instantiations
   RGB2GRAY r2g (
     .iCLK(iClk),
-    .iReset_n(iRst_n),
+    .iReset_n(Rst_nR),
     .iRed(iCCD_R),
     .iGreen(iCCD_G),
     .iBlue(iCCD_B),
@@ -65,7 +71,7 @@ module Total_Module
   Total_Histogram T1
   (
     .iClk(iClk),
-    .iRst_n(iRst_n),
+    .iRst_n(Rst_nR),
     .iGray(GRAY_DATA),
     .iGrayValid(GRAY_VAL),
     .iFvalid(iFval),
@@ -74,6 +80,7 @@ module Total_Module
     .iReadGray(display_hist_rda),
     .oGray(),
     .oGrayHisto(display_hist_q),
+    .oMaxValue(maxDisplayVal),
     .oGrayCumHisto(display_cumh_q),
     .oThresh(cumulative_histo_threshold),
     .oDone()
@@ -86,8 +93,11 @@ module Total_Module
     .X_Cont(iX_Cont),
     .Y_Cont(iY_Cont),
     .iHistoValue(display_hist_q),
+    .iMaxValue(maxDisplayVal),
+    .iThreshPoint(thresh_val),
     .oHistoAddr(display_hist_rda),
     .oPixel(histo_pixel),
+    .oRed(histo_disp_red),
     .oValid(hist_val)
   );
 
@@ -97,6 +107,9 @@ module Total_Module
     .X_Cont(iX_Cont),
     .Y_Cont(iY_Cont),
     .iHistoValue(display_cumh_q),
+    .iMaxValue(20'd384000),
+    .iThreshPoint(thresh_val),
+    .oRed(cumh_disp_red),
     .oPixel(cumh_pixel)
   );
 
@@ -113,7 +126,7 @@ module Total_Module
   Arbitrator arbiter
   (
     .iClk(iClk),
-    .iRst_n(iRst_n),
+    .iRst_n(Rst_nR),
     // Select Input
     .iSelect(iDisplaySelect),
 
@@ -135,9 +148,11 @@ module Total_Module
     .iHist(histo_pixel),
     .iThresholdLevel(cumulative_histo_threshold),
     .iHist_Valid(hist_val),
+    .iHist_Red(histo_disp_red),
 
     // CUmulative inputs
     .iCumHist(cumh_pixel),
+    .iCumHistRed(cumh_disp_red),
 
     // Threshold Input
     .iThresh(thresh_pixel),

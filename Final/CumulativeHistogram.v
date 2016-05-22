@@ -27,8 +27,9 @@ module CumulativeHistogram #(parameter word_size=20,
   output reg [7:0] oThreshold, // The chosen threshold 
   output reg oWE,
   
-  output reg [20:0] oDataOutHist,
+  output reg [19:0] oDataOutHist,
   output reg [7:0]  oAddrOutHist,
+  output reg [19:0] oMaxValue, 
   
   output reg oDone
 );
@@ -44,6 +45,7 @@ begin
 	 oAddrOutHist <= 0;
     if (iStart) begin
 		  doneAck      <= 0;
+        oMaxValue  <= 0;
         state 		   <= 0;
         oAddrInHist  <= 255;
         oAddrOutCumH <= 255;
@@ -78,7 +80,8 @@ begin
         oAddrOutCumH <= oAddrInHist - 8'b1;
         oWE    	   <= 1;
         if (oDataOutCumH > percentile)
-            oThreshold <= (oThreshold) ? oThreshold : oAddrOutCumH;				
+            oThreshold <= (oThreshold) ? oThreshold : oAddrOutCumH;	
+      oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;   
 		  oDataOutHist <= iQInHist;
 		  oAddrOutHist <= oAddrInHist - 8'b1;
 		  
@@ -89,6 +92,7 @@ begin
         oDataOutCumH <= oDataOutCumH + iQInHist;
 		  oDataOutHist <= iQInHist;
 		  oAddrOutHist <= 255;
+      oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;
         oWE          <= 1;
     end else if (state == 5) begin
 		  if (iRestart == 1)

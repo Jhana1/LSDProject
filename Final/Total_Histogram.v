@@ -12,7 +12,8 @@ module Total_Histogram
 	 // Histogram Outputs
 	 output [7:0]  oGray,
    output [19:0] oGrayHisto,
-	 
+	 output [19:0] oMaxValue,
+   
 	 // Cumulative Histogram Outputs
 	 output [7:0]  oGrayCum,
 	 output [19:0] oGrayCumHisto,
@@ -97,7 +98,8 @@ CumulativeHistogram c1
    .oDone(cumDone),
 	
 	.oDataOutHist(HistWData),
-	.oAddrOutHist(HistWAddr)
+	.oAddrOutHist(HistWAddr),
+  .oMaxValue(oMaxValue)
 );
 
 true_dpram_sclk Hist1   (.clk(iClk), 
