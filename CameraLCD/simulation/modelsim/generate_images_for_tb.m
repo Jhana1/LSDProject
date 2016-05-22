@@ -17,3 +17,9 @@ fclose(f);
 f = fopen('shark_blue.txt', 'w');
 fprintf(f, '%d\n', b);
 fclose(f);
+
+g = rgb2gray(s);
+g = reshape(g, 800*480, 1);
+f = fopen('shark.txt', 'w');
+fprintf(f, '%d\n', g);
+fclose(f);

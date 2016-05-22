@@ -110,7 +110,10 @@ module Total_Module
     .X_Cont(iX_Cont),
     .Y_Cont(iY_Cont),
     .iHistoValue(display_cumh_q),
-    .iMaxValue(20'd384000),
+    //.iMaxValue(20'd384000),
+    .iMaxValue(maxDisplayVal),
+    //.iMaxValue(20'd10000),
+    
     .iThreshPoint(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
     .oPixel(cumh_pixel),
