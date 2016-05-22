@@ -98,7 +98,7 @@ begin
             if (iHist_Valid)
             begin
                 if (iHist_Red) begin
-                    disp_R  <= -1;
+                    disp_R  <= 255 << 4;
                     disp_G  <= 0;
                     disp_B  <= 0;
                 end else begin
@@ -132,7 +132,7 @@ begin
             if (iHist_Valid)
             begin
                 if (iCumHistRed) begin
-                    disp_R    <= -1;
+                    disp_R    <= 255 << 4;
                     disp_G    <= 0;
                     disp_B    <= 0;
                 end else begin
@@ -149,7 +149,7 @@ begin
             end
         end
         default: begin
-            disp_R        <= -1;
+            disp_R        <= 255 << 4;
             disp_G        <= 0;
             disp_B        <= 0;
             oWr_data_valid <= iRGB_Valid;

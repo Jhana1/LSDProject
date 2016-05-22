@@ -113,7 +113,8 @@ module Total_Module
     .iMaxValue(20'd384000),
     .iThreshPoint(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
-    .oPixel(cumh_pixel)
+    .oPixel(cumh_pixel),
+    .iValid(hist_val) // ????????????
   );
 
   Thresholder thresher 
@@ -132,6 +133,7 @@ module Total_Module
     .iRst_n(Rst_nR),
     // Select Input
     .iSelect(iDisplaySelect),
+    .iFval(iFval), // ?????????
 
     // Coordinates
     .iX_Cont(iX_Cont),
