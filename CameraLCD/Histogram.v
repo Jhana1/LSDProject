@@ -1,60 +1,51 @@
 module Histogram
-(
+  #(parameter DATA_WIDTH=20, parameter ADDR_WIDTH=8)
+  (
     input iClk,
-    input iRst_n,
-    input iClearRam,
-    input [7:0] iGray,
-    input iValid,
-    output [17:0] oQ
-);
+    input iClear,
+    input iInc,
+    input [(ADDR_WIDTH-1):0] iGray, 
+    output [(ADDR_WIDTH)-1:0] oGray,
+    output [(DATA_WIDTH-1):0] oGrayHisto
+  );
 
-reg [1:0] cell_ptr;
-
-wire valid1, valid2, valid3;
-
-wire [17:0] Q1, Q2, Q3;
-
-assign valid1 = iValid && (cell_ptr == 2'b00);
-assign valid2 = iValid && (cell_ptr == 2'b01);
-assign valid3 = iValid && (cell_ptr == 2'b10);
-
-assign oQ = Q1 + Q2 + Q3;
-
-HistogramCell hcell1 (
-    .iClk(iClk), 
-    .iRst_n(iRst_n),
-    .iClearRam(iClearRam),
-    .iGray(iGray),
-    .iValid(valid1), 
-    .oQ(Q1)
-    );
-
-HistogramCell hcell2 (
-    .iClk(iClk), 
-    .iRst_n(iRst_n),
-    .iClearRam(iClearRam),
-    .iGray(iGray), 
-    .iValid(valid2), 
-    .oQ(Q2)
-    );
-
-HistogramCell hcell3 (
-    .iClk(iClk), 
-    .iRst_n(iRst_n),
-    .iClearRam(iClearRam),
-    .iGray(iGray),
-    .iValid(valid3), 
-    .oQ(Q3)
-    );
-
-always @(posedge iClk) begin
-    if (!iRst_n) begin
-        cell_ptr <= 0;
-    end else begin
-        if (cell_ptr == 2'b10) cell_ptr <= 0;
-        else cell_ptr <= cell_ptr + 1'b1;
+  // Declare the RAM variable
+  reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+  reg [DATA_WIDTH-1:0] tmp;
+  reg [ADDR_WIDTH-1:0] GrayR, GrayD;
+  reg [ADDR_WIDTH-1:0] ClearCount;
+  reg IncD, IncR;
+  assign oGrayHisto = tmp;
+  assign oGray = GrayD;
+  
+  
+  
+  always @ (posedge iClk)
+  begin
+    // Reset
+    tmp <= ram[GrayR];
+    ClearCount <= 0;
+    if (iClear) begin
+      ClearCount <= ClearCount + 8'b1;
+      ram[ClearCount] <= 0;
+      
     end
-end
-
-
+    else if (IncD) begin
+      if (GrayD == GrayR) begin
+        tmp <= tmp + 20'b1;
+        ram[GrayD] <= tmp + 20'b1;
+      end 
+      else begin
+        ram[GrayD] <= tmp + 20'b1;
+      end
+    end
+  end
+  
+  always @ (posedge iClk)
+  begin
+    GrayR <= iGray;
+    GrayD <= GrayR;
+    IncR <= iInc;
+    IncD <= IncR;
+  end
 endmodule
