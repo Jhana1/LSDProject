@@ -42,7 +42,8 @@ always @(posedge iCLK or negedge iReset_n)
 		  rRed     <= iRed;
 		  rGreen   <= iGreen;
 		  rBlue    <= iBlue;
-		  accumOut <= (rRed >> 2) + (rRed >> 4) + (rGreen >> 1) + (rGreen >> 4) + (rBlue >> 3);
+		  //accumOut <= (rRed >> 2) + (rRed >> 4) + (rGreen >> 1) + (rGreen >> 4) + (rBlue >> 3);
+		  accumOut <= (rRed>>2)+(rRed>>5)+(rGreen>>1)+(rGreen>>4)+(rBlue>>4)+(rBlue>>5);
 		  oDval    <= rDval;
 		  
 		  rX_Cont <= iX_Cont;

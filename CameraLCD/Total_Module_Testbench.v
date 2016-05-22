@@ -17,9 +17,9 @@ wire mCCD_FVAL = frame_val;
 wire [15:0] Y_Cont = Y;
 wire [15:0] X_Cont = X;
 
-wire [11:0] sCCD_R = R;
-wire [11:0] sCCD_G = G;
-wire [11:0] sCCD_B = B;
+wire [11:0] sCCD_R = {R, 4'b0};
+wire [11:0] sCCD_G = {G, 4'b0};
+wire [11:0] sCCD_B = {B, 4'b0};
 
 wire sCCD_DVAL = pix_val;
 
@@ -33,7 +33,7 @@ wire [7:0] oRed, oGreen, oBlue;
 assign oRed = wr1_data[9:2];
 assign oGreen = {wr1_data[14:10], wr2_data[14:12]};
 assign oBlue = wr2_data[9:2];
-assign oGray = (2989 * oRed + 5870 * oGreen + 1140 * oBlue)/10000;
+assign oGray = oRed;
 
 Total_Module TOTAL
   (
@@ -76,6 +76,7 @@ initial begin
     #50000
     rst = 1;
     
+    /* Warmup */
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
@@ -96,14 +97,14 @@ initial begin
     $fclose(gfile);
     $fclose(bfile);
     #2;
-    
-    iSW = 4'd3;
-    #200000;
-    /***** HISTOGRAM THE IMAGE ***********/
+        
+    iSW = 4'd2;
+    #50000;
+    //**** Grayscale THE IMAGE ***********/
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
-    file = $fopen("shark_histogrammed.txt", "w");
+    file = $fopen("shark_grayed.txt", "w");
     #2;
     frame_val = 1;
     pix_val = 1;
@@ -112,7 +113,7 @@ initial begin
             $fscanf(rfile, "%d\n", R); 
             $fscanf(gfile, "%d\n", G); 
             $fscanf(bfile, "%d\n", B);
-            $fwrite(file, "%d\n", oBlue);
+            $fwrite(file, "%d\t%d\t%d\n", oRed, oGreen, oBlue);
             #2;
         end
     end
@@ -123,36 +124,10 @@ initial begin
     $fclose(bfile);
     $fclose(file);
     
-    
-    iSW = 4'd5;
-    #200000;
-    /***** CUMULATIVE HISTOGRAM THE IMAGE ***********/
-    rfile = $fopen("shark_red.txt", "r");
-    gfile = $fopen("shark_green.txt", "r");
-    bfile = $fopen("shark_blue.txt", "r");
-    file = $fopen("shark_cumulated.txt", "w");
-    #2;
-    frame_val = 1;
-    pix_val = 1;
-    for (Y = 0; Y < 480; Y = Y + 1) begin
-        for (X = 0; X < 800; X = X + 1) begin               
-            $fscanf(rfile, "%d\n", R); 
-            $fscanf(gfile, "%d\n", G); 
-            $fscanf(bfile, "%d\n", B);
-            $fwrite(file, "%d\n", oBlue);
-            #2;
-        end
-    end
-    frame_val = 0;
-    pix_val = 0;
-    $fclose(rfile);
-    $fclose(gfile);
-    $fclose(bfile);
-    $fclose(file);
     
     iSW = 4'd4;
-    #200000;
-    /***** Threshold THE IMAGE ***********/
+    #50000;
+    //***** Threshold THE IMAGE ***********
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
@@ -165,7 +140,7 @@ initial begin
             $fscanf(rfile, "%d\n", R); 
             $fscanf(gfile, "%d\n", G); 
             $fscanf(bfile, "%d\n", B);
-            $fwrite(file, "%d\n", oBlue);
+            $fwrite(file, "%d\t%d\t%d\n", oRed, oGreen, oBlue);
             #2;
         end
     end
@@ -176,6 +151,61 @@ initial begin
     $fclose(bfile);
     $fclose(file);
     
+    
+    iSW = 4'd3;
+    #50000;
+    //**** HISTOGRAM THE IMAGE ***********
+    rfile = $fopen("shark_red.txt", "r");
+    gfile = $fopen("shark_green.txt", "r");
+    bfile = $fopen("shark_blue.txt", "r");
+    file = $fopen("shark_histogrammed.txt", "w");
+    #2;
+    frame_val = 1;
+    pix_val = 1;
+    for (Y = 0; Y < 480; Y = Y + 1) begin
+        for (X = 0; X < 800; X = X + 1) begin               
+            $fscanf(rfile, "%d\n", R); 
+            $fscanf(gfile, "%d\n", G); 
+            $fscanf(bfile, "%d\n", B);
+            $fwrite(file, "%d\t%d\t%d\n", oRed, oGreen, oBlue);
+            #2;
+        end
+    end
+    frame_val = 0;
+    pix_val = 0;
+    $fclose(rfile);
+    $fclose(gfile);
+    $fclose(bfile);
+    $fclose(file);
+    
+    
+    iSW = 4'd5;
+    #50000;
+    //**** CUMULATIVE HISTOGRAM THE IMAGE ***********
+    rfile = $fopen("shark_red.txt", "r");
+    gfile = $fopen("shark_green.txt", "r");
+    bfile = $fopen("shark_blue.txt", "r");
+    file = $fopen("shark_cumulated.txt", "w");
+    #2;
+    frame_val = 1;
+    pix_val = 1;
+    for (Y = 0; Y < 480; Y = Y + 1) begin
+        for (X = 0; X < 800; X = X + 1) begin               
+            $fscanf(rfile, "%d\n", R); 
+            $fscanf(gfile, "%d\n", G); 
+            $fscanf(bfile, "%d\n", B);
+            $fwrite(file, "%d\t%d\t%d\n", oRed, oGreen, oBlue);
+            #2;
+        end
+    end
+    frame_val = 0;
+    pix_val = 0;
+    $fclose(rfile);
+    $fclose(gfile);
+    $fclose(bfile);
+    $fclose(file);
+    
+
     
     #2 $stop;
 end

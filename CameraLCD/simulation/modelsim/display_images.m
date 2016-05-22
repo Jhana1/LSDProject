@@ -1,28 +1,29 @@
-subplot(1, 4, 1);
-file = fopen('shark_thresholded.txt', 'r');
-image_data = fscanf(file, '%d\n');
-fclose(file);
-image = reshape(image_data, 800, 480);
+subplot(1, 5, 1);
+image_data = dlmread('shark_grayed.txt');
+image = reshape(image_data, 800, 480, 3);
+imshow(uint8(image));
+title('Grayed');
+
+subplot(1, 5, 2);
+image_data = dlmread('shark_thresholded.txt');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Thresholded');
 
-subplot(1, 4, 2);
-file = fopen('shark_histogrammed.txt', 'r');
-image_data = fscanf(file, '%d\n');
-fclose(file);
-image = reshape(image_data, 800, 480);
+subplot(1, 5, 3);
+
+image_data = dlmread('shark_histogrammed.txt');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Histogrammed');
 
-subplot(1, 4, 3);
-file = fopen('shark_cumulated.txt', 'r');
-image_data = fscanf(file, '%d\n');
-fclose(file);
-image = reshape(image_data, 800, 480);
+subplot(1, 5, 4);
+image_data = dlmread('shark_cumulated.txt');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Cumulated');
 
-subplot(1, 4, 4);
+subplot(1, 5, 5);
 file = fopen('shark_hist_displayed.txt', 'r');
 image_data = fscanf(file, '%d\n');
 fclose(file);

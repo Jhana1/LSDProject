@@ -116,8 +116,7 @@ module Total_Module
     
     .iThreshPoint(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
-    .oPixel(cumh_pixel),
-    .iValid(hist_val) // ????????????
+    .oPixel(cumh_pixel)
   );
 
   Thresholder thresher 
