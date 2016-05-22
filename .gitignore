@@ -4,6 +4,9 @@
 .swp
 .swo
 *.qws
+*.done
+*.summary
+*.jdi
 *.4ct
 *.4tc
 *.aux
