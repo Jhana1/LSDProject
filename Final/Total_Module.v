@@ -31,12 +31,14 @@ module Total_Module
   wire GRAY_VAL;
   wire [7:0] GRAY_DATA;
   wire [15:0] gX_Cont, gY_Cont;
+  wire [19:0] maxDisplayVal;
   reg Rst_nR;
 
   /* Histogram Ram and displayer */
   wire [19:0] display_hist_q;
   wire [7:0] display_hist_rda;
   wire [7:0] histo_pixel;
+  wire histo_disp_red;
 
   /* Cumulative Histogram Ram and displayer */
   wire [7:0] display_cumh_rda;
@@ -46,6 +48,7 @@ module Total_Module
   wire [7:0] cumulative_histo_threshold;
   wire hist_val;
   wire thresh_val;
+  wire cumh_disp_red;
 
   always @(posedge iClk)
   begin
@@ -94,7 +97,7 @@ module Total_Module
     .Y_Cont(iY_Cont),
     .iHistoValue(display_hist_q),
     .iMaxValue(maxDisplayVal),
-    .iThreshPoint(thresh_val),
+    .iThreshPoint(cumulative_histo_threshold),
     .oHistoAddr(display_hist_rda),
     .oPixel(histo_pixel),
     .oRed(histo_disp_red),
@@ -108,7 +111,7 @@ module Total_Module
     .Y_Cont(iY_Cont),
     .iHistoValue(display_cumh_q),
     .iMaxValue(20'd384000),
-    .iThreshPoint(thresh_val),
+    .iThreshPoint(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
     .oPixel(cumh_pixel)
   );

@@ -433,7 +433,8 @@ wire	[9:0]	oVGA_G;	 				//	VGA Green[9:0]
 wire	[9:0]	oVGA_B;   				//	VGA Blue[9:0]
 reg		[1:0]	rClk;
 wire			sdram_ctrl_clk;
-
+wire mCCD_FVAL;
+wire WR_DATA_VAL;
 //=============================================================================
 // Structural coding
 //=============================================================================
@@ -544,8 +545,6 @@ Total_Module TOTAL
 //////////////////				
 
 wire [15:0] wr1_data, wr2_data;
-assign wr1_valid = sCCD_DVAL;
-assign wr2_valid = sCCD_DVAL;
 						
 
 // LK: takes 32 bit iDIG input and displays this on 8 seven segment displays oSEG0..7

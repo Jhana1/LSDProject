@@ -610,7 +610,6 @@ set_global_assignment -name TIMEQUEST_DO_REPORT_TIMING ON
 set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL OFF
 set_global_assignment -name VERILOG_FILE HistogramDisplayer.v
 set_global_assignment -name VERILOG_FILE Histogram.v
-set_global_assignment -name VERILOG_FILE dual_port_ram.v
 set_global_assignment -name VERILOG_FILE Arbitrator.v
 set_global_assignment -name SDC_FILE DE2_70.sdc
 set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/command.v
@@ -620,14 +619,10 @@ set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_Control_4Port
 set_global_assignment -name VERILOG_FILE Sdram_Control_4Port/Sdram_FIFO.v
 set_global_assignment -name SOURCE_FILE Sdram_Control_4Port/Sdram_Params.h
 set_global_assignment -name VERILOG_FILE Thresholder.v
-set_global_assignment -name VERILOG_FILE HistogramRam.v
-set_global_assignment -name VERILOG_FILE CumHistogramRam.v
-set_global_assignment -name VERILOG_FILE HistogramCell.v
 set_global_assignment -name VERILOG_FILE RGB2GRAY.v
 set_global_assignment -name VERILOG_FILE true_dpram_sclk.v
 set_global_assignment -name VERILOG_FILE Total_Histogram.v
 set_global_assignment -name VERILOG_FILE CumulativeHistogram.v
-set_global_assignment -name VERILOG_FILE single_port_ram.v
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
 set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
@@ -635,11 +630,9 @@ set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
 set_global_assignment -name AUTO_PACKED_REGISTERS_STRATIXII NORMAL
 set_global_assignment -name SIGNALTAP_FILE stp1.stp
-set_global_assignment -name VERILOG_FILE Fake_Dual_Port_Ram.v
 set_global_assignment -name VERILOG_FILE Total_Module.v
-set_global_assignment -name RTLV_GROUP_COMB_LOGIC_IN_CLOUD ON
+set_global_assignment -name RTLV_GROUP_COMB_LOGIC_IN_CLOUD OFF
 set_global_assignment -name SLD_FILE "C:/Users/James/Projects/ECE4063-Project/Final/stp1_auto_stripped.stp"
-set_global_assignment -name SDC_FILE Total_Module.sdc
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"

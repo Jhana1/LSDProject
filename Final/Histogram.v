@@ -1,13 +1,13 @@
 module Histogram
-#(parameter DATA_WIDTH=20, parameter ADDR_WIDTH=8)
-(
-  input iClk,
-  input iClear,
-  input iInc,
-  input [(ADDR_WIDTH-1):0] iGray, 
-  output [(ADDR_WIDTH)-1:0] oGray,
-  output [(DATA_WIDTH-1):0] oGrayHisto
-);
+  #(parameter DATA_WIDTH=20, parameter ADDR_WIDTH=8)
+  (
+    input iClk,
+    input iClear,
+    input iInc,
+    input [(ADDR_WIDTH-1):0] iGray, 
+    output [(ADDR_WIDTH)-1:0] oGray,
+    output [(DATA_WIDTH-1):0] oGrayHisto
+  );
 
   // Declare the RAM variable
   reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];

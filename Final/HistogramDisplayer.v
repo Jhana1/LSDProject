@@ -6,9 +6,10 @@ module HistogramDisplayer(
 	input [19:0] iHistoValue,
   input [19:0] iMaxValue,
   input [7:0] iThreshPoint,
-	output [7:0] oHistoAddr,
-	output reg [7:0] oPixel,
-	output reg oValid);
+  output [7:0] oHistoAddr,
+  output reg [7:0] oPixel,
+  output reg oRed,
+  output reg oValid);
 parameter MidPoint = 383;
 /* Pull in the histogram value based on Y_Cont from the RAM */
 
@@ -20,11 +21,11 @@ reg [19:0] rMaxValue;
 
 always @(posedge iClk) begin
 	if ((800 - X_Cont) < (iHistoValue >> Normalize) && (383 - Y_Cont) < 255) begin
-		oPixel   <= 255
-    oRedLine <= (oHistoAddr == iThreshPoint);
-	end else begin
-		oPixel <= 0;
-	end
+		oPixel   <= 255;
+    oRed <= (oHistoAddr == iThreshPoint);
+  end else begin
+    oPixel <= 0;
+  end
 end
 
 always @(posedge iClk) begin

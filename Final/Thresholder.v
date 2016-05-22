@@ -4,8 +4,9 @@ module Thresholder (
 	input iValid,
 	input [7:0] iThreshold, 
 	output reg [7:0] oPixel,
-	output reg oValid);
-	
+	output reg oValid
+	);
+
 always @(posedge iClk) begin
 	if (iGray < iThreshold) begin
 		oPixel <= 0;
