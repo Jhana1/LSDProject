@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at dual_port_ram.v(17): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at Fake_Dual_Port_Ram.v(19): always construct contains both blocking and non-blocking assignments
