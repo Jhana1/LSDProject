@@ -103,7 +103,7 @@ begin
         oAddrOutCumH <= 0;
         oDataOutCumH <= 0;
         oWE    	   <= 0;
-        oDone        <= (doneAck == 1) ? 1'b0 : 1'b1;
+        oDone      <= (doneAck == 1) ? 1'b0 : 1'b1;
     end
 end
 

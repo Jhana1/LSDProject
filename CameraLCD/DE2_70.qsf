@@ -25,7 +25,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F896C6
-set_global_assignment -name TOP_LEVEL_ENTITY HistogramDisplayer
+set_global_assignment -name TOP_LEVEL_ENTITY Total_Histogram
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "7.2 SP3"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:22:35  APRIL 09, 2008"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -621,7 +621,7 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH HistogramDisplayer_Testbench -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH Total_Histogram_Testbench -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME Arbitrator_Testbench -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Arbitrator_Testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Arbitrator_Testbench -section_id Arbitrator_Testbench
@@ -634,6 +634,18 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME HistogramDisplayer_Testbe
 set_global_assignment -name EDA_TEST_BENCH_NAME Total_Module_Testbench -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Total_Module_Testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Total_Module_Testbench -section_id Total_Module_Testbench
+set_global_assignment -name EDA_TEST_BENCH_NAME CumulativeHistogram_Testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id CumulativeHistogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME CumulativeHistogram_Testbench -section_id CumulativeHistogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Arbitrator_Testbench.v -section_id Arbitrator_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Histogram_Testbench.v -section_id Histogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE HistogramDisplayer_Testbench.v -section_id HistogramDisplayer_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Total_Module_Testbench.v -section_id Total_Module_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE CumulativeHistogram_Testbench.v -section_id CumulativeHistogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_NAME Total_Histogram_Testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Total_Histogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Total_Histogram_Testbench -section_id Total_Histogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Total_Histogram_Testbench.v -section_id Total_Histogram_Testbench
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
@@ -658,8 +670,4 @@ set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to DRAM_DQ
 set_instance_assignment -name TSU_REQUIREMENT "1 ns" -from DRAM_DQ -to *
 set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u6|mDATAOUT"
 set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u11|mDATAOUT"
-set_global_assignment -name EDA_TEST_BENCH_FILE Arbitrator_Testbench.v -section_id Arbitrator_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE Histogram_Testbench.v -section_id Histogram_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE HistogramDisplayer_Testbench.v -section_id HistogramDisplayer_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE Total_Module_Testbench.v -section_id Total_Module_Testbench
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

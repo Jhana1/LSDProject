@@ -62,7 +62,7 @@ initial begin
     valid = 0;
     gray = 0;
     #2;
-    for (i = 0; i < 255; i = i + 1) begin
+    for (i = 0; i < 256; i = i + 1) begin
         gray = i;
         #2;
         $fwrite(file, "%d\n", histo_val);
