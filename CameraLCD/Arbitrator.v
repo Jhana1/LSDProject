@@ -4,7 +4,7 @@ module Arbitrator(
     input iFval,
 
     // Select Input
-    input [2:0] iSelect,
+    input [10:0] iSelect,
     
     input [15:0] iX_Cont,
     input [15:0] iY_Cont,
@@ -30,6 +30,10 @@ module Arbitrator(
     input [7:0] iThresh,
     input iThresh_Valid,
     
+	 // Multithresh Input
+	 input [7:0] iMultiThresh,
+	 input iMultiThreshValid,
+	 
     // Cumulative Histogram Inputs
     input [7:0] iCumHist,
     input iCumHistRed,
@@ -43,7 +47,7 @@ module Arbitrator(
 
 // Output Registers
 reg [11:0] disp_R, disp_G, disp_B;
-reg [2:0] rSelect;
+reg [10:0] rSelect;
 reg rFval;
 reg [7:0] fValCount;
 
@@ -70,7 +74,7 @@ begin
     end else begin  
 
         case (rSelect)
-        1: begin // RGB Select
+        10'd1: begin // RGB Select
             if (iRGB_Valid) begin
                 disp_R    <= iRGB_R;
                 disp_G    <= iRGB_G;
@@ -83,7 +87,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        2: begin // GRAY Select
+        10'd2: begin // GRAY Select
             if (iGray_Valid)
             begin
                 disp_R    <= iGray << 4;
@@ -97,7 +101,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        3: begin // Histogram Select
+        10'd4: begin // Histogram Select
             if (iHist_Valid)
             begin
                 if (iHist_Red) begin
@@ -117,21 +121,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        4: begin // Threshold select
-            if (iThresh_Valid)
-            begin
-                disp_R    <= iThresh << 4;
-                disp_G    <= iThresh << 4;
-                disp_B    <= iThresh << 4;
-                oWr_data_valid <= 1;
-            end else begin
-                disp_R     <= 0;
-                disp_G    <= 0;
-                disp_B     <= 0;
-                oWr_data_valid <= 0;
-            end
-        end
-        5: begin // Display cumulative histogram
+        10'd8: begin // Display cumulative histogram
             if (iHist_Valid)
             begin
                 if (iCumHistRed) begin
@@ -148,6 +138,48 @@ begin
                 disp_R    <= 0;
                 disp_G    <= 0;
                 disp_B    <= 0;
+                oWr_data_valid <= 0;
+            end
+        end
+		  10'd16: begin // Threshold select
+            if (iThresh_Valid)
+            begin
+                disp_R    <= iThresh << 4;
+                disp_G    <= iThresh << 4;
+                disp_B    <= iThresh << 4;
+                oWr_data_valid <= 1;
+            end else begin
+                disp_R     <= 0;
+                disp_G    <= 0;
+                disp_B     <= 0;
+                oWr_data_valid <= 0;
+            end
+        end
+		  10'd32: begin // Not Smooth MultiThresh
+		  if (iMultiThreshValid)
+            begin
+                disp_R    <= iMultiThresh << 4;
+                disp_G    <= iMultiThresh << 4;
+                disp_B    <= iMultiThresh << 4;
+                oWr_data_valid <= 1;
+            end else begin
+                disp_R     <= 0;
+                disp_G    <= 0;
+                disp_B     <= 0;
+                oWr_data_valid <= 0;
+            end
+        end
+		  10'd64: begin // Smooth Multithresh
+		  if (iMultiThreshValid)
+            begin
+                disp_R    <= iMultiThresh << 4;
+                disp_G    <= iMultiThresh << 4;
+                disp_B    <= iMultiThresh << 4;
+                oWr_data_valid <= 1;
+            end else begin
+                disp_R     <= 0;
+                disp_G    <= 0;
+                disp_B     <= 0;
                 oWr_data_valid <= 0;
             end
         end

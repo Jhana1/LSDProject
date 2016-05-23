@@ -19,6 +19,8 @@ module Total_Histogram
     output [19:0] oGrayCumHisto,
     
     output [7:0] oThresh,
+	 output [7:0] oThresh25,
+	 output [7:0] oThresh75,
     output reg oDone
 );
 
@@ -51,7 +53,7 @@ wire [19:0] writeCumGrayData, CumHistQ, ReadCumHistData;
 
 // General
 // ===================================
-wire [7:0] thresh; 
+wire [7:0] thresh25, thresh, thresh75; 
 reg  [7:0] rThresh;
 wire Hist1We, Hist2We, writeEnable, cumDone, hDone;
 
@@ -93,8 +95,9 @@ CumulativeHistogram c1
    .oAddrOutCumH(writeCumGrayAddr),
    .oWE(writeEnable),
 
-   .oThreshold(thresh), // The chosen threshold 
-
+	.oThresh25(oThresh25),
+   .oThresh50(thresh), // The chosen threshold 
+	.oThresh75(oThresh75),
    .oDone(cumDone),
 
    .oDataOutHist(HistWData),

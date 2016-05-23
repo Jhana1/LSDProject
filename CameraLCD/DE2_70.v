@@ -535,7 +535,7 @@ Total_Module TOTAL
     .iCCD_DVAL(sCCD_DVAL),
 
     // Display
-    .iDisplaySelect(iSW[4:1]),
+    .iDisplaySelect(iSW[11:1]),
 
     // Output
     .wr1_data(wr1_data),
