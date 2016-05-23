@@ -520,7 +520,7 @@ RAW2RGB				u3	(	.iCLK(CCD_PIXCLK),		//LK: pixel clock running at 60 MHz
 Total_Module TOTAL
   (
     // General
-    .iClk(CCD_PIXCLK),
+    .CCD_PIXCLK(CCD_PIXCLK),
     .iRst_n(DLY_RST_1),
 
     // Frame Related
@@ -535,7 +535,7 @@ Total_Module TOTAL
     .iCCD_DVAL(sCCD_DVAL),
 
     // Display
-    .iDisplaySelect(iSW[3:0]),
+    .iDisplaySelect(iSW[4:1]),
 
     // Output
     .wr1_data(wr1_data),

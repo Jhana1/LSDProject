@@ -1,7 +1,7 @@
 module Total_Module
   (
     // General
-    input iClk,
+    input CCD_PIXCLK,
     input iRst_n,
 
     // Frame Related
@@ -49,7 +49,10 @@ module Total_Module
   wire hist_val;
   wire thresh_val;
   wire cumh_disp_red;
-
+  
+  
+  wire iClk = CCD_PIXCLK;
+  
   always @(posedge iClk)
   begin
     Rst_nR <= iRst_n;

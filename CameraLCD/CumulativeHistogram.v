@@ -29,7 +29,7 @@ module CumulativeHistogram #(parameter word_size=20,
   
   output reg [19:0] oDataOutHist,
   output reg [7:0]  oAddrOutHist,
-  output reg [19:0] oMaxValue, 
+  output [19:0] oMaxValue, 
   
   output reg oDone
 );
@@ -37,6 +37,13 @@ module CumulativeHistogram #(parameter word_size=20,
 reg [3:0] state;
 reg doneAck;
 //parameter percentile = (800*400)/2;
+reg [19:0] max_value;
+reg [19:0] prev_max_value;
+
+// Use the second most maximum value, istead of the first. This helps to smooth 
+// the scaling changes a little
+assign oMaxValue = max_value;
+
 
 always @(posedge iClk)
 begin
@@ -45,7 +52,8 @@ begin
 	 oAddrOutHist <= 0;
     if (iStart) begin
 		  doneAck      <= 0;
-        oMaxValue  <= 0;
+        max_value  <= 0;
+		  prev_max_value <= 0;
         state 		   <= 0;
         oAddrInHist  <= 255;
         oAddrOutCumH <= 255;
@@ -79,9 +87,17 @@ begin
         oDataOutCumH <= oDataOutCumH + iQInHist;
         oAddrOutCumH <= oAddrInHist - 8'b1;
         oWE    	   <= 1;
+		  
+		  // When the entire image is one color, we will never set the threshold.
+		  // By default the threshold will be zero. This is a reasonable assumption.
         if (oDataOutCumH > percentile)
             oThreshold <= (oThreshold) ? oThreshold : oAddrOutCumH;	
-      oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;   
+        //oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;
+		  if (iQInHist > oMaxValue) begin
+				max_value <= iQInHist;
+				prev_max_value <= max_value;
+			end
+		  
 		  oDataOutHist <= iQInHist;
 		  oAddrOutHist <= oAddrInHist - 8'b1;
 		  
@@ -92,7 +108,14 @@ begin
         oDataOutCumH <= oDataOutCumH + iQInHist;
 		  oDataOutHist <= iQInHist;
 		  oAddrOutHist <= 255;
-      oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;
+			
+			//oMaxValue    <= (iQInHist > oMaxValue) ? iQInHist : oMaxValue;
+		  if (iQInHist > oMaxValue) begin
+				max_value <= iQInHist;
+				prev_max_value <= max_value;
+		  end
+		
+		
         oWE          <= 1;
     end else if (state == 5) begin
 		  if (iRestart == 1)

@@ -20,12 +20,14 @@ reg [3:0] Normalize;
 reg [19:0] rMaxValue;
 
 always @(posedge iClk) begin
-	if ((800 - X_Cont) < (iHistoValue >> Normalize) && (383 - Y_Cont) < 255) begin
+	if ((MidPoint - Y_Cont) < 256)
+		oRed <= (oHistoAddr == iThreshPoint);
+	 
+	if ((800 - X_Cont) < (iHistoValue >> Normalize) && (MidPoint - Y_Cont) < 256) begin
 		oPixel   <= 255;
-    oRed <= (oHistoAddr == iThreshPoint);
-  end else begin
-    oPixel <= 0;
-  end
+	end else begin
+		oPixel <= 0;
+	end
 end
 
 always @(posedge iClk) begin
