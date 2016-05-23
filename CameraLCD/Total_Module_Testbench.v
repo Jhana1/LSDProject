@@ -99,7 +99,7 @@ initial begin
     $fclose(bfile);
     #2;
     
-    
+    /*
     iSW = 4'd1;
     #50000;
     //**** Color THE IMAGE ***********
@@ -177,7 +177,7 @@ initial begin
     $fclose(rfile);
     $fclose(gfile);
     $fclose(bfile);
-    $fclose(file);
+    $fclose(file);*/
     
     
     iSW = 4'd3;
