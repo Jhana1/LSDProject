@@ -7,6 +7,8 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{rotating}
+\usepackage{subfig}
 
 \usepackage{graphicx}
 \usepackage{tabularx}
@@ -27,21 +29,7 @@
   \subsection{RGB to Grayscale conversion}
   
   \subsection{Histogram Module}
-  \subsubsection{Description}
-  The histogram module was based on a design from an article found on the IEEE website. The biggest problem we had in our initial attempts to create a histogram module as the latency in RAM access. The issue is that one cannot simultaneously read and write to a RAM, so when consecutive grayscale input values are identical, we are unable to correctly update the relevant RAM address. Our design overcomes this problem by specifically addressing the RAM latency issue. This histogram design consists of individual histogram \textit{cells}, each of which accesses its own RAM. By switching between these cells, the histogram is able to share the latency burden across multiple RAMs. Our histogram cells had a latency of three cycles, so we used three cells. This means that each cycle, one histogram cell is always ready to take in an input value. In order to get data out, we simply used a combinational logic block to address all three RAMs simultaneously and sum their outputs to get the true histogram value. Whilst this architecture does use more RAM resources, it is much easier to understand and thus enabled us to be confident that the system worked correctly.
-  \subsubsection{RTL Diagram}
-  \begin{figure}[H]
-    \centering{\includegraphics[scale=.8]{Images/HistogramRTL.png}}
-    \caption{Histogram module RTL}
-    \label{fig:histogram_rtl}
-  \end{figure}
-  
-  \begin{figure}[H]
-    \centering{\includegraphics[scale=.8]{Images/HistogramCellRTL.png}}
-    \caption{Histogram Cell module RTL}
-    \label{fig:histogram_cell_rtl}
-  \end{figure}
-  
+  The histogram module was 
   
   \subsubsection{Module Testbench Results}
   
@@ -63,13 +51,36 @@
   \subsubsection{Description}
   In order to display the greyscale image, histogram, cumulative histogram, and thresholded image, we wrote a module to handle multiplexing between them using the switches on the DE2 board, called Arbitrator. This module takes in pixel outputs from the various modules and multiplexes them depending on the switch positions. In order to display images, we simply piggyback on the \(X\_Cont\) and \(Y\_Cont\) signals and modify the \(wr1\_data\) and \(wr2\_data\) inputs to the SDRAM with the appropriate pixel data. \\
       
-  Displaying the actual histogram data requires slightly more effort. First we need to extract the histogram data from the histogram RAM and convert the histogram bin sizes into pixels for display on the screen. To do this we have a module called HistogramDisplayer. This module takes in the \(Y\_Cont\) signal and uses it to index the histogram RAM. Based on the histogram value from the RAM, it scales the histogram value, and uses the \(X\_Cont\) signal to determine the length of the line to be displayed. 
+  Displaying the actual histogram data requires slightly more effort. First we need to extract the histogram data from the histogram RAM and convert the histogram bin contents into pixels for display on the screen. To do this we have a module called HistogramDisplayer. This module takes in the \(Y\_Cont\) signal and uses it to index the histogram RAM. Based on the value obtained from the RAM, it scales the histogram value, and uses the \(X\_Cont\) signal to determine the length of the line to be displayed. 
+  \subsubsection{RTL Diagram}
+    \begin{figure}[H]
+    \centering{\includegraphics[scale=.8]{Images/ArbitratorRTL.png}}
+    \caption{Arbitrator module RTL}
+    \label{fig:arbitrator_rtl}
+  \end{figure} 
+  \subsubsection{RTL Diagram}
+    \begin{figure}[H]
+    \centering{\includegraphics[scale=.8]{Images/HistogramDisplayerRTL.png}}
+    \caption{HistogramDisplayer module RTL}
+    \label{fig:histogram_displayer_rtl}
+  \end{figure}
   
   \section{Acknowledgements}
   
   \section{Improvements}
   
   \section{Conclusion}
+  
+  \newpage
+  \section{Appendix A}
+  \subsection{RTL Diagrams}
+  \subsubsection{Histogram}
+  \begin{figure}[H]
+    \ContinuedFloat
+    \centering{\includegraphics[scale=.6, angle=-90]{Images/HistogramRTL.png}}
+    \caption{Histogram module RTL}
+    \label{fig:histogram_rtl}
+  \end{figure}
   
   
   

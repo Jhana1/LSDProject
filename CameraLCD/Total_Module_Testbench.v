@@ -73,7 +73,8 @@ initial begin
     //
     iSW = 4'd1;
     
-    #50000
+    #50000;
+    #1;
     rst = 1;
     
     /* Warmup */
@@ -97,10 +98,38 @@ initial begin
     $fclose(gfile);
     $fclose(bfile);
     #2;
+    
+    
+    iSW = 4'd1;
+    #50000;
+    //**** Color THE IMAGE ***********
+    rfile = $fopen("shark_red.txt", "r");
+    gfile = $fopen("shark_green.txt", "r");
+    bfile = $fopen("shark_blue.txt", "r");
+    file = $fopen("shark_color.txt", "w");
+    #2;
+    frame_val = 1;
+    pix_val = 1;
+    for (Y = 0; Y < 480; Y = Y + 1) begin
+        for (X = 0; X < 800; X = X + 1) begin               
+            $fscanf(rfile, "%d\n", R); 
+            $fscanf(gfile, "%d\n", G); 
+            $fscanf(bfile, "%d\n", B);
+            $fwrite(file, "%d\t%d\t%d\n", oRed, oGreen, oBlue);
+            #2;
+        end
+    end
+    frame_val = 0;
+    pix_val = 0;
+    $fclose(rfile);
+    $fclose(gfile);
+    $fclose(bfile);
+    $fclose(file);
         
+    /*
     iSW = 4'd2;
     #50000;
-    //**** Grayscale THE IMAGE ***********/
+    // **** Grayscale THE IMAGE **********
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
@@ -124,10 +153,9 @@ initial begin
     $fclose(bfile);
     $fclose(file);
     
-    
     iSW = 4'd4;
     #50000;
-    //***** Threshold THE IMAGE ***********
+    // ***** Threshold THE IMAGE ***********
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
@@ -203,7 +231,7 @@ initial begin
     $fclose(rfile);
     $fclose(gfile);
     $fclose(bfile);
-    $fclose(file);
+    $fclose(file);*/
     
 
     

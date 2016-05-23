@@ -1,15 +1,15 @@
 module HistogramDisplayer(
-	input iClk,
-	input iValid,
-	input [15:0] X_Cont,
-	input [15:0] Y_Cont,
-	input [19:0] iHistoValue,
-  input [19:0] iMaxValue,
-  input [7:0] iThreshPoint,
-  output [7:0] oHistoAddr,
-  output reg [7:0] oPixel,
-  output reg oRed,
-  output reg oValid);
+    input iClk,
+    input iValid,
+    input [15:0] X_Cont,
+    input [15:0] Y_Cont,
+    input [19:0] iHistoValue,
+    input [19:0] iMaxValue,
+    input [7:0] iThreshPoint,
+    output [7:0] oHistoAddr,
+    output reg [7:0] oPixel,
+    output reg oRed,
+    output reg oValid);
 parameter MidPoint = 383;
 /* Pull in the histogram value based on Y_Cont from the RAM */
 

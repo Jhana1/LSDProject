@@ -85,6 +85,7 @@ module Total_Module
     .oGrayHisto(display_hist_q),
     .oMaxValue(maxDisplayVal),
     .oGrayCumHisto(display_cumh_q),
+    
     .oThresh(cumulative_histo_threshold),
     .oDone()
   );					
@@ -110,9 +111,7 @@ module Total_Module
     .X_Cont(iX_Cont),
     .Y_Cont(iY_Cont),
     .iHistoValue(display_cumh_q),
-    //.iMaxValue(20'd384000),
-    .iMaxValue(maxDisplayVal),
-    //.iMaxValue(20'd10000),
+    .iMaxValue(20'd384000),
     
     .iThreshPoint(cumulative_histo_threshold),
     .oRed(cumh_disp_red),

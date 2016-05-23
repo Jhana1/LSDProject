@@ -44,6 +44,8 @@ module Arbitrator(
 // Output Registers
 reg [11:0] disp_R, disp_G, disp_B;
 reg [2:0] rSelect;
+reg rFval;
+reg [7:0] fValCount;
 
 // TOUCH TCON DATA LOCATION
 // RED      =  Wr1_DATA[9:2]
@@ -57,7 +59,8 @@ assign oWr2_data = {disp_G[6:2], disp_R[11:2]};
 
 always @(posedge iClk)
 begin
-    rSelect <= (!iFval) ? iSelect : rSelect;
+    rSelect <= (fValCount == 50) ? iSelect : rSelect;
+    rFval = iFval;
     if (!iRst_n)
     begin
         // General Reset
@@ -156,6 +159,14 @@ begin
         end
     endcase
 end
+end
+
+always @(posedge iClk)
+begin
+    if (rFval)
+        fValCount <= 0;
+    else
+        fValCount <= fValCount + 1;
 end
 
 endmodule       
