@@ -105,7 +105,7 @@ begin
 		  
     end else if (state == 4) begin
         delayed      <= 1;
-        state 		 <= (delayed) ? 5 : 4;
+        state 		   <= (delayed) ? 5 : 4;
         oAddrInHist  <= 0;
         oAddrOutCumH <= 255;
         oDataOutCumH <= oDataOutCumH + iQInHist;
@@ -117,7 +117,9 @@ begin
 				max_value <= iQInHist;
 				prev_max_value <= max_value;
 		  end
-		
+			
+		  if (oDataOutCumH > percentile)
+            oThreshold <= (oThreshold) ? oThreshold : oAddrOutCumH;
 		
         oWE          <= 1;
     end else if (state == 5) begin

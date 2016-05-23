@@ -20,7 +20,7 @@ reg [3:0] Normalize;
 reg [19:0] rMaxValue;
 
 always @(posedge iClk) begin
-	if ((MidPoint - Y_Cont) < 256)
+	if ((MidPoint - Y_Cont) < 256 && iThreshPoint != 0)
 		oRed <= (oHistoAddr == iThreshPoint);
 	 
 	if ((800 - X_Cont) < (iHistoValue >> Normalize) && (MidPoint - Y_Cont) < 256) begin
