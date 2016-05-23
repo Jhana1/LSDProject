@@ -98,7 +98,7 @@ initial begin
     /* Now write out the histogram values */
     file = $fopen("shark_cumhist.txt", "w");
     #2;
-    for (i = 0; i < 255; i = i + 1) begin
+    for (i = 0; i < 256; i = i + 1) begin
         read_addr = i;
         #2;
         $fwrite(file, "%d\n", cumh_val);

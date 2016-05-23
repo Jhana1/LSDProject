@@ -39,6 +39,7 @@ reg doneAck;
 //parameter percentile = (800*400)/2;
 reg [19:0] max_value;
 reg [19:0] prev_max_value;
+reg delayed;
 
 // Use the second most maximum value, istead of the first. This helps to smooth 
 // the scaling changes a little
@@ -55,13 +56,13 @@ begin
         max_value  <= 0;
 		  prev_max_value <= 0;
         state 		   <= 0;
-        oAddrInHist  <= 255;
-        oAddrOutCumH <= 255;
+        oAddrInHist  <= 0;
+        oAddrOutCumH <= 0;
         oThreshold 	<= 0;
         oWE 	    	<= 0;
     end else if (state == 0) begin
         state 		   <= 1;
-        oAddrInHist  <= 255;
+        oAddrInHist  <= 0;
         oAddrOutCumH <= 0;
         oThreshold   <= 0;
     end else if (state == 1) begin
@@ -83,6 +84,7 @@ begin
             state 	<= 4;
         else
             state	   <= 3;
+        delayed      <= 0;
         oAddrInHist  <= oAddrInHist + 8'b1;
         oDataOutCumH <= oDataOutCumH + iQInHist;
         oAddrOutCumH <= oAddrInHist - 8'b1;
@@ -102,7 +104,8 @@ begin
 		  oAddrOutHist <= oAddrInHist - 8'b1;
 		  
     end else if (state == 4) begin
-        state 		   <= 5;
+        delayed      <= 1;
+        state 		 <= (delayed) ? 5 : 4;
         oAddrInHist  <= 0;
         oAddrOutCumH <= 255;
         oDataOutCumH <= oDataOutCumH + iQInHist;
