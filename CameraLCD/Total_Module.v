@@ -16,12 +16,17 @@ module Total_Module
     input iCCD_DVAL,
 
     // Display
-    input [10:0] iDisplaySelect,
+    input [17:0] iDisplaySelect,
 
     // Output
     output [15:0] wr1_data,
     output [15:0] wr2_data,
-    output WR_DATA_VAL
+    output WR_DATA_VAL,
+	 
+	 // Delayed Frame Data
+	 
+	 input [15:0] delayedFrame_DATA1, 
+	 input [15:0] delayedFrame_DATA2
   );
   /*************************************************************
  * OUR STUFF **************
@@ -44,17 +49,24 @@ module Total_Module
   wire [7:0] display_cumh_rda;
   wire [19:0] display_cumh_q;
   wire [7:0] cumh_pixel;
-  wire [7:0] thresh_pixel, MultiThreshPixel;
+  wire [7:0] thresh_pixel, delayed_thresh_pixel, MultiThreshPixel;
   wire [7:0] cumulative_histo_threshold, THRESH_25, THRESH_75;
   wire hist_val;
-  wire thresh_val;
+  wire thresh_val, delayed_thresh_val;
   wire cumh_disp_red;
   wire MultiThreshValid;
   
+  /* Extract delayed gray value from owr1 and owr2 data...*/
+  wire [7:0] delayed_Gray_Val = {delayedFrame_DATA1[15], delayedFrame_DATA1[1:0], delayedFrame_DATA2[15], 
+                                 delayedFrame_DATA2[12:11], delayedFrame_DATA2[1:0]};
+  
   wire iClk = CCD_PIXCLK;
+  reg rCCD_DVAL, dCCD_DVAL;
   
   always @(posedge iClk)
   begin
+	 rCCD_DVAL <= iCCD_DVAL;
+	 dCCD_DVAL <= rCCD_DVAL;
     Rst_nR <= iRst_n;
   end
   
@@ -121,7 +133,7 @@ module Total_Module
     .iMaxValue(20'd384000),
     .iThreshPoint25(cumulative_histo_threshold),
     .iThreshPoint50(cumulative_histo_threshold),
-	 .iThreadPoint75(cumulative_histo_threshold),
+	 .iThreshPoint75(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
     .oPixel(cumh_pixel)
   );
@@ -136,6 +148,17 @@ module Total_Module
     .oPixel(thresh_pixel)
   );
   
+  
+  Thresholder delayed_thresher 
+  (
+    .iClk(iClk), 
+    .iGray(delayed_Gray_Val),
+    .iValid(dCCD_DVAL), 
+    .iThreshold(cumulative_histo_threshold), 
+    .oValid(delayed_thresh_val),
+    .oPixel(delayed_thresh_pixel)
+  );
+  
   MultiThresh (
 	.iClk(iClk), 
 	.iGray(GRAY_DATA),
@@ -144,7 +167,7 @@ module Total_Module
 	.iThresh2(THRESH_75),
 	.iX_Cont(gX_Cont),
 	.iY_Cont(gY_Cont),
-	.iSmooth(iDisplaySelect[6]),
+	.iSmooth(iDisplaySelect[7]),
 	.oPixel(MultiThreshPixel),
 	.oValid(MultiThreshValid),
 	);
@@ -184,6 +207,10 @@ module Total_Module
     // Threshold Input
     .iThresh(thresh_pixel),
     .iThresh_Valid(thresh_val),
+	 
+	 // Delayed gray value
+	 .iThresh_d(delayed_thresh_pixel),
+	 .iThresh_Valid_d(delayed_thresh_val),
 	 
 	 // Multithreshold Input
 	 .iMultiThresh(MultiThreshPixel),
