@@ -15,7 +15,6 @@ reg[7:0] delta;
 reg[7:0] thresh;
 reg[31:0] s_thresh;
 
-reg [31:0] s_delta;
 reg [31:0] s_step;
 
 
@@ -40,14 +39,11 @@ always @(posedge iClk) begin
 		end
 	end 
 	else begin // SYNTH MADNESS
-	
-		 //thresh <= 128;
-		 //s_thresh <= iThresh2 << 24;
 		 
-		 if (iY_Cont <= (240 - 64) && iY_Cont >= 0) begin
+		 if (iY_Cont <= (240 - 128) && iY_Cont >= 0) begin
 			  thresh <= iThresh2;
 			  s_thresh <= iThresh2 << 24;
-		 end else if (iY_Cont >= (240 + 64) && iY_Cont <= 490) begin
+		 end else if (iY_Cont >= (240 + 128) && iY_Cont <= 490) begin
 			  thresh <= iThresh1;
 		 end else begin
 			  if (iX_Cont == 799) begin
@@ -57,43 +53,12 @@ always @(posedge iClk) begin
 			  end
 			  thresh <= s_thresh >> 24;
 		 end
-		 
 		 oPixel <= (iGray < thresh) ? 0 : 255;
-			 
-		
-	
-	/*
-		if (iY_Cont < (240 - 64) && iY_Cont > 0) begin
-			if (iGray < iThresh2) begin
-				oPixel <= 0;
-			end else begin
-				oPixel <= 255;
-			end 
-			
-			if ((iY_Cont >= (240 - 64)) && (iY_Cont <= (240 + 64))) begin
-				synth_thresh <= (iThresh2  << 20) - (synth_step * (iY_Cont - (240 - 64)));
-				if (iGray < thresh) begin
-					oPixel <= 0;
-				end else begin
-					oPixel <= 255;
-				end
-			end 
-			
-			if (iY_Cont > (240 + 64) && iY_Cont < 490) begin
-				if (iGray < iThresh1) begin
-					oPixel <= 0;
-				end else begin
-					oPixel <= 255;
-				end
-			end
-		end
-		*/
 	end
 end
 
 always @(posedge iClk) begin
-	 s_delta = delta << 24;
-	 s_step = delta << 17;
+	s_step = delta << 16;
 	oValid <= iValid;
 	delta <= (iThresh2 - iThresh1);
 end

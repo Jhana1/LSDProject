@@ -150,7 +150,7 @@ module Total_Module
 	.iThresh2(THRESH_75),
 	.iX_Cont(gX_Cont),
 	.iY_Cont(gY_Cont),
-	.iSmooth(iDisplaySelect[7]),
+	.iSmooth(iDisplaySelect[8]),
 	.oPixel(MultiThreshPixel),
 	.oValid(MultiThreshValid),
 	);
