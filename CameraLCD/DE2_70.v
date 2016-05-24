@@ -517,6 +517,8 @@ RAW2RGB				u3	(	.iCLK(CCD_PIXCLK),		//LK: pixel clock running at 60 MHz
 //#######################################//						
 //--------------TOTAL MODULE------------//
 //#####################################//
+
+
 Total_Module TOTAL
   (
     // General
@@ -535,17 +537,19 @@ Total_Module TOTAL
     .iCCD_DVAL(sCCD_DVAL),
 
     // Display
-    .iDisplaySelect(iSW[4:1]),
+    .iDisplaySelect(iSW),
 
     // Output
     .wr1_data(wr1_data),
     .wr2_data(wr2_data),
-    .WR_DATA_VAL(WR_DATA_VAL)
+    .WR_DATA_VAL(WR_DATA_VAL),
+	 .oThreshold(threshold)
   );
 //////////////////				
 
 wire [15:0] wr1_data, wr2_data;
-						
+wire [15:0] delayedFrame_DATA1, delayedFrame_DATA2;						
+wire [7:0] threshold;
 
 // LK: takes 32 bit iDIG input and displays this on 8 seven segment displays oSEG0..7
 SEG7_LUT_8 			u4	(	.oSEG0(oHEX0_D),.oSEG1(oHEX1_D),
@@ -638,7 +642,7 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							.RD1_LENGTH(9'h100),
 							.RD1_LOAD(!DLY_RST_0),
 							.RD1_CLK(ltm_nclk),
-
+							
 							//	SDRAM Side
 						    .SA(oDRAM1_A[11:0]),
 						    .BA(oDRAM1_BA),
@@ -667,13 +671,26 @@ I2C_CCD_Config 		u9	(	//	Host Side
 							.I2C_SDAT(GPIO_1[19])
 
 						);
+						
+						
+/* OUR THING */
+wire [15:0] Read_DATA1_Delayed, Read_DATA2_Delayed;
+
+ DelayThresholder dt(
+	.iEnable(iSW[6]),
+	.iThreshold(threshold),
+	.iData1(Read_DATA1),
+	.iData2(Read_DATA2),
+	.oData1(Read_DATA1_Delayed), 
+	.oData2(Read_DATA2_Delayed));
+						
 // LK:  LCD Display driver: Controls reading of the SDRAM buffers and sending data to LCD.
 // LK:  This module can be altered to overwrite the image on the display with for example touch point coordinates.
 touch_tcon			u10	( .iCLK(ltm_nclk),			// Display clock running @ 33 MHz
 							.iRST_n(DLY_RST_2),
 							// sdram side
-							.iREAD_DATA1(Read_DATA1),	// LK: read SDRAM pixel values.
-							.iREAD_DATA2(Read_DATA2),	// LK: read SDRAM pixel values.
+							.iREAD_DATA1(Read_DATA1_Delayed),	// LK: read SDRAM pixel values.
+							.iREAD_DATA2(Read_DATA2_Delayed),	// LK: read SDRAM pixel values.
 							.iTestMode(iSW[0]),
 							.oREAD_SDRAM_EN(Read),		// LK: 1 causes new data to be read on next ltm_nclk edge.
 														// LK: 0 means data does not change.

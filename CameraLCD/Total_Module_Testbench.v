@@ -38,7 +38,7 @@ assign oGray = oRed;
 Total_Module TOTAL
   (
     // General
-    .iClk(CCD_PIXCLK),
+    .CCD_PIXCLK(CCD_PIXCLK),
     .iRst_n(DLY_RST_1),
 
     // Frame Related
@@ -99,7 +99,7 @@ initial begin
     $fclose(bfile);
     #2;
     
-    
+    /*
     iSW = 4'd1;
     #50000;
     //**** Color THE IMAGE ***********
@@ -126,7 +126,7 @@ initial begin
     $fclose(bfile);
     $fclose(file);
         
-    /*
+    
     iSW = 4'd2;
     #50000;
     // **** Grayscale THE IMAGE **********
@@ -177,7 +177,7 @@ initial begin
     $fclose(rfile);
     $fclose(gfile);
     $fclose(bfile);
-    $fclose(file);
+    $fclose(file);*/
     
     
     iSW = 4'd3;
@@ -231,7 +231,7 @@ initial begin
     $fclose(rfile);
     $fclose(gfile);
     $fclose(bfile);
-    $fclose(file);*/
+    $fclose(file);
     
 
     

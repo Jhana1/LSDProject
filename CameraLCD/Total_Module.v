@@ -16,12 +16,15 @@ module Total_Module
     input iCCD_DVAL,
 
     // Display
-    input [3:0] iDisplaySelect,
+    input [17:0] iDisplaySelect,
 
     // Output
     output [15:0] wr1_data,
     output [15:0] wr2_data,
-    output WR_DATA_VAL
+    output WR_DATA_VAL,
+	 
+	 // Delayed Frame Threshold
+	 output [7:0] oThreshold
   );
   /*************************************************************
  * OUR STUFF **************
@@ -44,14 +47,17 @@ module Total_Module
   wire [7:0] display_cumh_rda;
   wire [19:0] display_cumh_q;
   wire [7:0] cumh_pixel;
-  wire [7:0] thresh_pixel;
-  wire [7:0] cumulative_histo_threshold;
+  wire [7:0] thresh_pixel, delayed_thresh_pixel, MultiThreshPixel;
+  wire [7:0] cumulative_histo_threshold, THRESH_25, THRESH_75;
   wire hist_val;
-  wire thresh_val;
+  wire thresh_val, delayed_thresh_val;
   wire cumh_disp_red;
-  
+  wire MultiThreshValid;
   
   wire iClk = CCD_PIXCLK;
+  reg rCCD_DVAL, dCCD_DVAL;
+  
+  assign oThreshold = cumulative_histo_threshold;
   
   always @(posedge iClk)
   begin
@@ -90,6 +96,8 @@ module Total_Module
     .oGrayCumHisto(display_cumh_q),
     
     .oThresh(cumulative_histo_threshold),
+	 .oThresh25(THRESH_25),
+	 .oThresh75(THRESH_75),
     .oDone()
   );					
 
@@ -101,7 +109,9 @@ module Total_Module
     .Y_Cont(iY_Cont),
     .iHistoValue(display_hist_q),
     .iMaxValue(maxDisplayVal),
-    .iThreshPoint(cumulative_histo_threshold),
+	 .iThreshPoint25(THRESH_25),
+    .iThreshPoint50(cumulative_histo_threshold),
+	 .iThreshPoint75(THRESH_75),
     .oHistoAddr(display_hist_rda),
     .oPixel(histo_pixel),
     .oRed(histo_disp_red),
@@ -115,8 +125,9 @@ module Total_Module
     .Y_Cont(iY_Cont),
     .iHistoValue(display_cumh_q),
     .iMaxValue(20'd384000),
-    
-    .iThreshPoint(cumulative_histo_threshold),
+    .iThreshPoint25(cumulative_histo_threshold),
+    .iThreshPoint50(cumulative_histo_threshold),
+	 .iThreshPoint75(cumulative_histo_threshold),
     .oRed(cumh_disp_red),
     .oPixel(cumh_pixel)
   );
@@ -130,6 +141,19 @@ module Total_Module
     .oValid(thresh_val),
     .oPixel(thresh_pixel)
   );
+  
+  MultiThresh (
+	.iClk(iClk), 
+	.iGray(GRAY_DATA),
+	.iValid(GRAY_VAL),
+	.iThresh1(THRESH_25),
+	.iThresh2(THRESH_75),
+	.iX_Cont(gX_Cont),
+	.iY_Cont(gY_Cont),
+	.iSmooth(iDisplaySelect[8]),
+	.oPixel(MultiThreshPixel),
+	.oValid(MultiThreshValid),
+	);
 
   Arbitrator arbiter
   (
@@ -166,6 +190,10 @@ module Total_Module
     // Threshold Input
     .iThresh(thresh_pixel),
     .iThresh_Valid(thresh_val),
+	 
+	 // Multithreshold Input
+	 .iMultiThresh(MultiThreshPixel),
+	 .iMultiThreshValid(MultiThreshValid),
 
     // Outputs
     .oWr1_data(wr1_data),
