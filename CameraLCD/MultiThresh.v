@@ -10,20 +10,18 @@ module MultiThresh (
 	output reg [7:0] oPixel,
 	output reg oValid
 	);
-	
-wire[7+20:0] synth_step, synth_delta;
-wire[7+20:0] thresh;
-
-assign synth_delta = delta << 20;
-assign synth_step = synth_delta >> 7;
-assign thresh = synth_thresh >> 20;
 
 reg[7:0] delta;
-reg[20+7:0] synth_thresh;
+reg[7:0] thresh;
+reg[31:0] s_thresh;
+
+reg [31:0] s_delta;
+reg [31:0] s_step;
+
 
 always @(posedge iClk) begin
 	if (iY_Cont == 0 && iX_Cont == 0) begin
-		synth_thresh <= 0;
+		s_thresh <= 0;
 	end
 	if (!iSmooth) begin
 		if (iY_Cont < 240) begin
@@ -40,30 +38,62 @@ always @(posedge iClk) begin
 				oPixel <= 255;
 			end
 		end
-	end else begin // SYNTH MADNESS
-		if ((iY_Cont > (240 - 64)) && (iY_Cont < (240 + 64))) begin
-			if (iX_Cont == 0) begin
-				if (thresh > iThresh1) begin
-					synth_thresh <= synth_thresh - synth_step;
+	end 
+	else begin // SYNTH MADNESS
+	
+		 //thresh <= 128;
+		 //s_thresh <= iThresh2 << 24;
+		 
+		 if (iY_Cont <= (240 - 64) && iY_Cont >= 0) begin
+			  thresh <= iThresh2;
+			  s_thresh <= iThresh2 << 24;
+		 end else if (iY_Cont >= (240 + 64) && iY_Cont <= 490) begin
+			  thresh <= iThresh1;
+		 end else begin
+			  if (iX_Cont == 799) begin
+					s_thresh <= s_thresh - s_step;
+			  end else begin
+					s_thresh <= s_thresh;
+			  end
+			  thresh <= s_thresh >> 24;
+		 end
+		 
+		 oPixel <= (iGray < thresh) ? 0 : 255;
+			 
+		
+	
+	/*
+		if (iY_Cont < (240 - 64) && iY_Cont > 0) begin
+			if (iGray < iThresh2) begin
+				oPixel <= 0;
+			end else begin
+				oPixel <= 255;
+			end 
+			
+			if ((iY_Cont >= (240 - 64)) && (iY_Cont <= (240 + 64))) begin
+				synth_thresh <= (iThresh2  << 20) - (synth_step * (iY_Cont - (240 - 64)));
+				if (iGray < thresh) begin
+					oPixel <= 0;
 				end else begin
-					synth_thresh <= synth_thresh;
+					oPixel <= 255;
+				end
+			end 
+			
+			if (iY_Cont > (240 + 64) && iY_Cont < 490) begin
+				if (iGray < iThresh1) begin
+					oPixel <= 0;
+				end else begin
+					oPixel <= 255;
 				end
 			end
-		end else if (iY_Cont <= (240 - 64)) begin
-			synth_thresh <= iThresh2 << 20;
-		end else begin
-			synth_thresh <= iThresh1 << 20;
 		end
-		
-		if (iGray < thresh) begin
-			oPixel <= 0;
-		end else begin
-			oPixel <= 255;
-		end
+		*/
 	end
 end
 
 always @(posedge iClk) begin
+	 s_delta = delta << 24;
+	 s_step = delta << 17;
 	oValid <= iValid;
 	delta <= (iThresh2 - iThresh1);
 end
