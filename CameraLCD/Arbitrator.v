@@ -169,11 +169,11 @@ begin
             end
         end
 		  10'd64: begin // Threshold Select - Correct Frame
-				if (iThresh_Valid_d)
+				if (iGray_Valid)
 				begin
-					disp_R <= iThresh_d << 4;
-					disp_G <= iThresh_d << 4;
-					disp_B <= iThresh_d << 4;
+					disp_R <= 0;
+					disp_G <= 0;
+					disp_B <= -1;
 					oWr_data_valid <= 1;
 				end else begin
 					disp_R <= 0;
