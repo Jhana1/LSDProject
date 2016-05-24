@@ -23,10 +23,8 @@ module Total_Module
     output [15:0] wr2_data,
     output WR_DATA_VAL,
 	 
-	 // Delayed Frame Data
-	 
-	 input [15:0] delayedFrame_DATA1, 
-	 input [15:0] delayedFrame_DATA2
+	 // Delayed Frame Threshold
+	 output [7:0] oThreshold
   );
   /*************************************************************
  * OUR STUFF **************
@@ -56,17 +54,13 @@ module Total_Module
   wire cumh_disp_red;
   wire MultiThreshValid;
   
-  /* Extract delayed gray value from owr1 and owr2 data...*/
-  wire [7:0] delayed_Gray_Val = {delayedFrame_DATA1[15], delayedFrame_DATA1[1:0], delayedFrame_DATA2[15], 
-                                 delayedFrame_DATA2[12:11], delayedFrame_DATA2[1:0]};
-  
   wire iClk = CCD_PIXCLK;
   reg rCCD_DVAL, dCCD_DVAL;
   
+  assign oThreshold = cumulative_histo_threshold;
+  
   always @(posedge iClk)
   begin
-	 rCCD_DVAL <= iCCD_DVAL;
-	 dCCD_DVAL <= rCCD_DVAL;
     Rst_nR <= iRst_n;
   end
   
@@ -148,17 +142,6 @@ module Total_Module
     .oPixel(thresh_pixel)
   );
   
-  
-  Thresholder delayed_thresher 
-  (
-    .iClk(iClk), 
-    .iGray(delayed_Gray_Val),
-    .iValid(dCCD_DVAL), 
-    .iThreshold(cumulative_histo_threshold), 
-    .oValid(delayed_thresh_val),
-    .oPixel(delayed_thresh_pixel)
-  );
-  
   MultiThresh (
 	.iClk(iClk), 
 	.iGray(GRAY_DATA),
@@ -207,10 +190,6 @@ module Total_Module
     // Threshold Input
     .iThresh(thresh_pixel),
     .iThresh_Valid(thresh_val),
-	 
-	 // Delayed gray value
-	 .iThresh_d(delayed_thresh_pixel),
-	 .iThresh_Valid_d(delayed_thresh_val),
 	 
 	 // Multithreshold Input
 	 .iMultiThresh(MultiThreshPixel),

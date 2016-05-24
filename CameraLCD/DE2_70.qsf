@@ -25,7 +25,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F896C6
-set_global_assignment -name TOP_LEVEL_ENTITY DelayThresholder
+set_global_assignment -name TOP_LEVEL_ENTITY DE2_70
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "7.2 SP3"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:22:35  APRIL 09, 2008"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -612,7 +612,7 @@ set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
 set_global_assignment -name AUTO_PACKED_REGISTERS_STRATIXII NORMAL
 set_global_assignment -name SIGNALTAP_FILE stp1.stp
 set_global_assignment -name VERILOG_FILE Total_Module.v
-set_global_assignment -name RTLV_GROUP_COMB_LOGIC_IN_CLOUD ON
+set_global_assignment -name RTLV_GROUP_COMB_LOGIC_IN_CLOUD OFF
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
@@ -663,6 +663,25 @@ set_global_assignment -name EDA_TEST_BENCH_FILE HistogramDisplayer_Testbench.v -
 set_global_assignment -name EDA_TEST_BENCH_FILE Total_Module_Testbench.v -section_id Total_Module_Testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE CumulativeHistogram_Testbench.v -section_id CumulativeHistogram_Testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE Total_Histogram_Testbench.v -section_id Total_Histogram_Testbench
+set_instance_assignment -name CLOCK_SETTINGS CCD_PIXCLK -to GPIO_CLKIN_N1
+set_instance_assignment -name CLOCK_SETTINGS CCD_MCLK -to GPIO_CLKOUT_N1
+set_instance_assignment -name CLOCK_SETTINGS CLK50 -to iCLK_50
+set_instance_assignment -name CLOCK_SETTINGS DRAM0_CLK -to oDRAM0_CLK
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to GPIO_CLKOUT_P1
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_DATA
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_FVAL
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_LVAL
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to GPIO_CLKIN_P1
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|Pre_FVAL"
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|mCCD_DATA"
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|mCCD_LVAL"
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to DRAM_DQ
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u11|mDATAOUT"
+set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u6|mDATAOUT"
+set_instance_assignment -name TSU_REQUIREMENT "1 ns" -from DRAM_DQ -to *
+set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_DATA
+set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_FVAL
+set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_LVAL
 set_global_assignment -name VERILOG_FILE MultiThresh.v
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to "Total_Module:TOTAL|MultiThresh:comb_7|delta[0]" -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[1] -to "Total_Module:TOTAL|MultiThresh:comb_7|delta[1]" -section_id auto_signaltap_0
@@ -900,24 +919,5 @@ set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_instance_assignment -name CLOCK_SETTINGS CCD_PIXCLK -to GPIO_CLKIN_N1
-set_instance_assignment -name CLOCK_SETTINGS CCD_MCLK -to GPIO_CLKOUT_N1
-set_instance_assignment -name CLOCK_SETTINGS CLK50 -to iCLK_50
-set_instance_assignment -name CLOCK_SETTINGS DRAM0_CLK -to oDRAM0_CLK
-set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to GPIO_CLKOUT_P1
-set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_DATA
-set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_FVAL
-set_instance_assignment -name FAST_INPUT_REGISTER ON -to rCCD_LVAL
-set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to GPIO_CLKIN_P1
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|Pre_FVAL"
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|mCCD_DATA"
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "CCD_Capture:u3|mCCD_LVAL"
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to DRAM_DQ
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u11|mDATAOUT"
-set_instance_assignment -name TCO_REQUIREMENT "1 ns" -from * -to "Sdram_Control_4Port:u6|mDATAOUT"
-set_instance_assignment -name TSU_REQUIREMENT "1 ns" -from DRAM_DQ -to *
-set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_DATA
-set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_FVAL
-set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_LVAL
 set_global_assignment -name SLD_FILE "C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/stp1_auto_stripped.stp"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
