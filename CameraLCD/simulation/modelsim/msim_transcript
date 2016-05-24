@@ -1,0 +1,344 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do DE2_70_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/HistogramDisplayer.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module HistogramDisplayer
+# 
+# Top level modules:
+# 	HistogramDisplayer
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Histogram
+# 
+# Top level modules:
+# 	Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Arbitrator.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Arbitrator
+# 
+# Top level modules:
+# 	Arbitrator
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Thresholder.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Thresholder
+# 
+# Top level modules:
+# 	Thresholder
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/RGB2GRAY.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module RGB2GRAY
+# 
+# Top level modules:
+# 	RGB2GRAY
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/true_dpram_sclk.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module true_dpram_sclk
+# 
+# Top level modules:
+# 	true_dpram_sclk
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Histogram
+# 
+# Top level modules:
+# 	Total_Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/CumulativeHistogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module CumulativeHistogram
+# 
+# Top level modules:
+# 	CumulativeHistogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Module
+# ** Error: C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(156): near ")": syntax error, unexpected ')', expecting .* or '.'
+# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./DE2_70_run_msim_rtl_verilog.do line 16
+# C:/altera/13.0sp1/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_M..."
+do DE2_70_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/HistogramDisplayer.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module HistogramDisplayer
+# 
+# Top level modules:
+# 	HistogramDisplayer
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Histogram
+# 
+# Top level modules:
+# 	Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Arbitrator.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Arbitrator
+# 
+# Top level modules:
+# 	Arbitrator
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Thresholder.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Thresholder
+# 
+# Top level modules:
+# 	Thresholder
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/RGB2GRAY.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module RGB2GRAY
+# 
+# Top level modules:
+# 	RGB2GRAY
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/true_dpram_sclk.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module true_dpram_sclk
+# 
+# Top level modules:
+# 	true_dpram_sclk
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Histogram
+# 
+# Top level modules:
+# 	Total_Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/CumulativeHistogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module CumulativeHistogram
+# 
+# Top level modules:
+# 	CumulativeHistogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Module
+# 
+# Top level modules:
+# 	Total_Module
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/MultiThresh.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module MultiThresh
+# 
+# Top level modules:
+# 	MultiThresh
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Module_Testbench
+# ** Error: C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(179): near "*": syntax error, unexpected '*'
+# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./DE2_70_run_msim_rtl_verilog.do line 19
+# C:/altera/13.0sp1/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_M..."
+do DE2_70_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/HistogramDisplayer.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module HistogramDisplayer
+# 
+# Top level modules:
+# 	HistogramDisplayer
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Histogram
+# 
+# Top level modules:
+# 	Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Arbitrator.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Arbitrator
+# 
+# Top level modules:
+# 	Arbitrator
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Thresholder.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Thresholder
+# 
+# Top level modules:
+# 	Thresholder
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/RGB2GRAY.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module RGB2GRAY
+# 
+# Top level modules:
+# 	RGB2GRAY
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/true_dpram_sclk.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module true_dpram_sclk
+# 
+# Top level modules:
+# 	true_dpram_sclk
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Histogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Histogram
+# 
+# Top level modules:
+# 	Total_Histogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/CumulativeHistogram.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module CumulativeHistogram
+# 
+# Top level modules:
+# 	CumulativeHistogram
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Module
+# 
+# Top level modules:
+# 	Total_Module
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/MultiThresh.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module MultiThresh
+# 
+# Top level modules:
+# 	MultiThresh
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD {C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module Total_Module_Testbench
+# 
+# Top level modules:
+# 	Total_Module_Testbench
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs="+acc"  Total_Module_Testbench
+# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps Total_Module_Testbench 
+# Loading work.Total_Module_Testbench
+# Loading work.Total_Module
+# Loading work.RGB2GRAY
+# Loading work.Total_Histogram
+# Loading work.Histogram
+# Loading work.CumulativeHistogram
+# Loading work.true_dpram_sclk
+# Loading work.HistogramDisplayer
+# Loading work.Thresholder
+# Loading work.MultiThresh
+# Loading work.Arbitrator
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(89): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(90): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(91): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(114): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(115): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(116): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(141): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(142): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(143): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(167): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(168): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(169): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(194): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(195): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(196): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(221): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(222): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(223): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(247): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(248): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(249): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(273): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(274): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-PLI-3691) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(275): Expected a system task, not a system function '$fscanf'.
+# 
+#         Region: /Total_Module_Testbench
+# ** Warning: (vsim-3017) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(62): [TFMPC] - Too few port connections. Expected 14, found 13.
+# 
+#         Region: /Total_Module_Testbench/TOTAL
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(62): [TFMPC] - Missing connection for port 'oThreshold'.
+# 
+# ** Warning: (vsim-3017) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(102): [TFMPC] - Too few port connections. Expected 17, found 16.
+# 
+#         Region: /Total_Module_Testbench/TOTAL/T1
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(102): [TFMPC] - Missing connection for port 'oGrayCum'.
+# 
+# ** Warning: (vsim-3017) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Too few port connections. Expected 13, found 10.
+# 
+#         Region: /Total_Module_Testbench/TOTAL/cumh_display
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'iValid'.
+# 
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'oHistoAddr'.
+# 
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'oValid'.
+# 
+# ** Warning: (vsim-3017) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Too few port connections. Expected 27, found 25.
+# 
+#         Region: /Total_Module_Testbench/TOTAL/arbiter
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Missing connection for port 'iThresh_d'.
+# 
+# ** Warning: (vsim-3722) C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Missing connection for port 'iThresh_Valid_d'.
+# 
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# Break in Module Total_Module_Testbench at C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v line 288
+# Simulation Breakpoint: Break in Module Total_Module_Testbench at C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/Total_Module_Testbench.v line 288
+# MACRO ./DE2_70_run_msim_rtl_verilog.do PAUSED at line 26

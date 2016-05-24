@@ -142,7 +142,7 @@ module Total_Module
     .oPixel(thresh_pixel)
   );
   
-  MultiThresh (
+  MultiThresh m_thresher(
 	.iClk(iClk), 
 	.iGray(GRAY_DATA),
 	.iValid(GRAY_VAL),
@@ -152,7 +152,7 @@ module Total_Module
 	.iY_Cont(gY_Cont),
 	.iSmooth(iDisplaySelect[8]),
 	.oPixel(MultiThreshPixel),
-	.oValid(MultiThreshValid),
+	.oValid(MultiThreshValid)
 	);
 
   Arbitrator arbiter

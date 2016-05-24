@@ -1,35 +1,48 @@
 %%
-subplot(1, 5, 1);
+subplot(1, 2, 1);
 image_data = dlmread('shark_color.txt');
-image = switchColors(reshape(image_data, 800, 480, 3), 'bgr');
+image =reshape(image_data, 800, 480, 3);
 imshow(uint8(image));
 title('Color image');
 
-subplot(1, 5, 2);
+subplot(1, 2, 2);
 image_data = dlmread('shark_grayed.txt');
-image = switchColors(reshape(image_data, 800, 480, 3), 'bgr');
+image = reshape(image_data, 800, 480, 3);
 imshow(uint8(image));
 title('Grayed');
 
-subplot(1, 5, 3);
+figure; 
+subplot(1, 2, 1);
 image_data = dlmread('shark_thresholded.txt');
-image = switchColors(reshape(image_data, 800, 480, 3), 'bgr');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Thresholded');
 
-subplot(1, 5, 4);
-
+subplot(1, 2, 2);
 image_data = dlmread('shark_histogrammed.txt');
-image = switchColors(reshape(image_data, 800, 480, 3), 'bgr');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Histogrammed');
 
-subplot(1, 5, 5);
+figure;
+subplot(1, 2, 1);
 image_data = dlmread('shark_cumulated.txt');
-image = switchColors(reshape(image_data, 800, 480, 3), 'bgr');
+image = reshape(image_data, 800, 480, 3);
 imshow(image);
 title('Cumulated');
 
+subplot(1, 2, 2);
+image_data = dlmread('shark_block_threshold.txt');
+image = reshape(image_data, 800, 480, 3);
+imshow(image);
+title('Cumulated');
+
+figure;
+
+image_data = dlmread('shark_smooth_threshold.txt');
+image = reshape(image_data, 800, 480, 3);
+imshow(image);
+title('Cumulated');
 %%
 figure;
 subplot(3, 1, 1);
