@@ -25,7 +25,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F896C6
-set_global_assignment -name TOP_LEVEL_ENTITY Total_Module
+set_global_assignment -name TOP_LEVEL_ENTITY DE2_70
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "7.2 SP3"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:22:35  APRIL 09, 2008"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -651,12 +651,13 @@ set_global_assignment -name VERILOG_FILE DelayThresholder.v
 set_global_assignment -name EDA_TEST_BENCH_NAME RGB2GRAY_Testbench -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id RGB2GRAY_Testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME RGB2GRAY_Testbench -section_id RGB2GRAY_Testbench
-set_global_assignment -name VERILOG_TEST_BENCH_FILE Histogram_Testbench.v
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
-set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
-set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name SLD_FILE "C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/stp1_auto_stripped.stp"
+set_global_assignment -name EDA_TEST_BENCH_FILE Arbitrator_Testbench.v -section_id Arbitrator_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Histogram_Testbench.v -section_id Histogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE HistogramDisplayer_Testbench.v -section_id HistogramDisplayer_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Total_Module_Testbench.v -section_id Total_Module_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE CumulativeHistogram_Testbench.v -section_id CumulativeHistogram_Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE Total_Histogram_Testbench.v -section_id Total_Histogram_Testbench
 set_instance_assignment -name CLOCK_SETTINGS CCD_PIXCLK -to GPIO_CLKIN_N1
 set_instance_assignment -name CLOCK_SETTINGS CCD_MCLK -to GPIO_CLKOUT_N1
 set_instance_assignment -name CLOCK_SETTINGS CLK50 -to iCLK_50
@@ -676,11 +677,9 @@ set_instance_assignment -name TSU_REQUIREMENT "1 ns" -from DRAM_DQ -to *
 set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_DATA
 set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_FVAL
 set_instance_assignment -name TSU_REQUIREMENT "5 ns" -from * -to rCCD_LVAL
-set_global_assignment -name EDA_TEST_BENCH_FILE Arbitrator_Testbench.v -section_id Arbitrator_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE Histogram_Testbench.v -section_id Histogram_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE HistogramDisplayer_Testbench.v -section_id HistogramDisplayer_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE Total_Module_Testbench.v -section_id Total_Module_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE CumulativeHistogram_Testbench.v -section_id CumulativeHistogram_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE Total_Histogram_Testbench.v -section_id Total_Histogram_Testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE RGB2GRAY_Testbench.v -section_id RGB2GRAY_Testbench
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 2147039 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
