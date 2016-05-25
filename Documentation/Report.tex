@@ -2,7 +2,7 @@
 
 \title{ECE4063 - Image Thresholding}
 %\subtitle{Progress Report}
-\author{Emmanuel Jacyna - 24227498 \and James Anastasiou - xxxxxxxx}
+\author{Emmanuel Jacyna - 24227498 \and James Anastasiou - 23438940}
 \date{\today}
 
 \usepackage[T1]{fontenc}
@@ -22,8 +22,15 @@
 \pagestyle{myheadings}
   \maketitle
   \tableofcontents
+  \section{Introduction}
+  This document represents our findings for Assignment 2 of ECE4063. It is organised into three major sections, assumptions, solution documentation, and a discussion of potential improvements to the project.\\
+  
+  The task at hand is to perform binary thresholding on an image for use in a bionic eye. The target platform is an Altera Cyclone II FPGA. In order to threshold the image, a histogram of the pixel greyscale values is calculated and used to find the 50th percentile grey scale value. This value is then used to decide whether to colour pixels white or black, performing a total threshold.
   
   \section{Assumptions}
+  When thresholding images, we assume that an image where 99.9\% of pixels are one value is meaningless to threshold. In the case of the Altera DE2 board with Terasic camera module, the small variation in value is likely to be because of pixel noise. We also believe that as the target is a human vision system, 100\% accuracy is not necessarily the goal, as we prefer an image that makes sense to the human eye. This design decision allowed for a simplification of the logic circuit required to determine the most accurate thresholding value. 
+  
+  We also assumed that Model Sim testbenches are 100\% completely accurate representations of reality. This assumption was routinely called into question, however after fixing a number of other assumptions, this sole assumption was found to be a valid assumption.
   
   \section{Documentation}
   \subsection{RGB to Grayscale conversion}

@@ -74,6 +74,8 @@ reg [7:0] dGray;
 assign oWr1_data = {dGray[7], disp_G[11:7],             disp_B[11:4], dGray[6:5]};
 assign oWr2_data = {dGray[4], disp_G[6:4],  dGray[3:2], disp_R[11:4], dGray[1:0]};
 
+GGGGG
+xx
 always @(posedge iClk)
 begin
     rSelect <= (fValCount == 50) ? iSelect : rSelect;
