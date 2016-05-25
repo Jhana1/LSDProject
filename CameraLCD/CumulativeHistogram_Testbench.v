@@ -45,7 +45,7 @@ CumulativeHistogram c1
    .oAddrOutCumH(cumh_addr),
    .oWE(cumh_we),
 
-   .oThreshold(thresh), // The chosen threshold 
+   .oThresh50(thresh50), // The chosen threshold 
 
    .oDone(done),
    .oMaxValue(max_val)
@@ -68,6 +68,7 @@ true_dpram_sclk cumh_ram (.clk(clk),
                           .addr_b(read_addr), 
                           .we_a(cumh_we), 
                           .we_b(1'b0), 
+                          .q_a(),
                           .q_b(cumh_val));
 
 always begin

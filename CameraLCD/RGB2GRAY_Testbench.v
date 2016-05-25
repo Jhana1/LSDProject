@@ -34,7 +34,6 @@ RGB2GRAY r2g (
     .oGray(Gray)
 );
 
-
 always begin
     #0 clk = 0;
     #1 clk = 1;
@@ -44,18 +43,18 @@ end
 initial begin
     /* Clear the RAM */
     rst = 0; X = 0; Y = 0; R = 0; G = 0; B = 0; frame_val = 0; pix_val = 0;
-    //
-    #50000;
-    //**** CUMULATIVE HISTOGRAM THE IMAGE ***********
+    //**** Convert the image to greyscale.***
     rfile = $fopen("shark_red.txt", "r");
     gfile = $fopen("shark_green.txt", "r");
     bfile = $fopen("shark_blue.txt", "r");
     file = $fopen("shark_grayed_v.txt", "w");
-    #2;
+    #10;
+    rst = 1;
+    #10
     frame_val = 1;
     pix_val = 1;
     for (Y = 0; Y < 480; Y = Y + 1) begin
-        for (X = 0; X < 800; X = X + 1) begin               
+        for (X = 0; X < 800; X = X + 1) begin
             $fscanf(rfile, "%d\n", R); 
             $fscanf(gfile, "%d\n", G); 
             $fscanf(bfile, "%d\n", B);

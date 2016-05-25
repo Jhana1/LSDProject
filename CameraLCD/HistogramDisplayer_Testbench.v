@@ -39,7 +39,7 @@ HistogramDisplayer hd(
     .Y_Cont(Y),
     .iHistoValue(histo_val),
     .iMaxValue(max_val),
-    .iThreshPoint(0),
+    .iThreshPoint50(0),
     .oHistoAddr(histo_addr),
     .oPixel(pixel),
     .oRed(red),
