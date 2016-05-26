@@ -37,6 +37,19 @@
   
  
   \section{Documentation - Basic Requirements}
+  \subsection{Switch assignments}
+  \begin{itemize}
+  \item SW[0] -- Displays Touch TCon test vector
+  \item SW[1] -- Displays colour image
+  \item SW[2] -- Displays greyscale image
+  \item SW[3] -- Displays histogram
+  \item SW[4] -- Displays cumulative histogram
+  \item SW[5] -- Displays simple thresholding
+  \item SW[6] -- Displays delayed thresholding
+  \item SW[7] -- Displays block thresholding
+  \item SW[8] -- Displays interpolated block thresholding
+  \end{itemize}
+  
   \subsection{RGB to Grayscale conversion}
   There are a number of ways to convert 12bit RGB values into 8Bit Grayscale values, these include taking the average between all 3 colour channels, desaturating the channels or performing a weighted average based on the NTSC standard. Each of these approaches has benefits and weaknesses, our design decision was to approximate the NTSC standard weighted average via fixed shift additions. The decision to approximate the results meant the design did not need to include a multiplier or divider circuit, which significantly improved performance. Three multipliers were replaced with six additions, which if optimised appropriately could utilise Carry Save Adder hardware to improve the performance. Unfortunately as a result of approximating the NTSC values, the actual grayscale values produced to not match exactly with the theoretical values, this was found to be incorrect by a maximum of six units, which we determined to be not a significant loss in precision compared to the speedup and simplification of hardware seen, especially as the end goal of this system is image thresholding.
 
@@ -68,21 +81,6 @@
   In order to display the greyscale image, histogram, cumulative histogram, and thresholded image, we wrote a module to handle multiplexing between them using the switches on the DE2 board, called Arbitrator. This module takes in pixel outputs from the various modules and multiplexes them depending on the switch positions. In order to display images, we simply piggyback on the \(X\_Cont\) and \(Y\_Cont\) signals and modify the \(wr1\_data\) and \(wr2\_data\) inputs to the SDRAM with the appropriate pixel data. \\
       
   Displaying the actual histogram data requires slightly more effort. First we need to extract the histogram data from the histogram RAM and convert the histogram bin contents into lines of appropriate length for display on the screen. To do this we have a module called HistogramDisplayer. This module takes in the \(Y\_Cont\) signal and uses it to index the histogram RAM. Based on the value obtained from the RAM, it scales the histogram value, and uses the \(X\_Cont\) signal to determine the length of the line to be displayed. The decision was made to display the histograms using the full width of the LCD screen. Whilst this does mean that some of the lowest values are not displayed (values less than ten), we found that the lowest black values, due to a quirk of the camera system, never drop below about twelve or thirteen. We thus decided to sacrifice those values in order to get a better view of the histogram as a whole.
-  \subsubsection{RTL Diagram}
-    \begin{figure}[H]
-    \begin{center}
-        {\includegraphics[width=\textwidth]{Images/ArbitratorRTL.png}}
-    \end{center}
-    \caption{Arbitrator module RTL}
-    \label{fig:arbitrator_rtl}
-  \end{figure} 
-  \subsubsection{RTL Diagram}
-    \begin{figure}[H]
-    \centering{\includegraphics[width=\textwidth]{Images/HistogramDisplayerRTL.png}}
-    \caption{HistogramDisplayer module RTL}
-    \label{fig:histogram_displayer_rtl}
-  \end{figure}
-  
   
   \subsection{High Level Overview}
   \begin{figure}[H]
@@ -116,9 +114,9 @@
   Our implementation of fractional bits was very inefficient, significant improvements could be found by only shifting left by the absolutely minimum amount needed, the extra bits gained by a shift of 24 instead of 7 (or 8 in our case) provide no extra precision in our use case. The extra bits only serve to slow down that aspect of the circuit, which is a clear example of something that could be easily optimised away.
   
   \section{Acknowledgements}
-  We strived to produce only original material, however, we do acknowledge the contributions of others. We obtained some inspiration for the histogram module from a paper published by Maggiani et.al. \cite{histogram}. This paper suggested writing a naive histogram state machine that ignored the consecutive edge case, and instead used multiple histogram cells, essentially independent histograms with indepent RAMs to hide the RAM access latency and avoid overwriting consecutive values. We did try this method initially, but believed that better use of resources could be obtained by limiting ourselves to one RAM and using a temporary register to handle the consecutive values case. \\
+  We strived to produce only original material, however, we do acknowledge the contributions of others. We obtained some inspiration for the histogram module from a paper published by Maggiani et.al. \cite{histogram}. This paper suggested writing a naive histogram state machine that ignored the consecutive edge case, and instead used multiple histogram cells, essentially independent histograms with indepedent RAMs to hide the RAM access latency and avoid overwriting consecutive values. We did try this method initially, but believed that better use of resources could be obtained by limiting ourselves to one RAM and using a temporary register to handle the consecutive values case. \\
   
-  We also obtained ideas from the lectures provided by Dr. David Boland and Dr. Lindsay Kleeman; their suggestions were quite valuable and helped to keep us on track. We also had help from Sam Theodoulou, he gave us a helpful tutorial on the correct usage of Signal Tap.
+  We also obtained ideas from the lectures provided by Dr. David Boland and Dr. Lindsay Kleeman; their suggestions were quite valuable and helped to keep us on track. We also had help from Sam Theodoulou, who gave us a helpful tutorial on the correct usage of Signal Tap.
   
   \section{Improvements}
   Get tbs working sooner. Test properly. Find out mroe about the touch tcon. 
