@@ -78,8 +78,8 @@ assign oWr2_data = {dGray[4], disp_G[6:4],  dGray[3:2], disp_R[11:4], dGray[1:0]
 
 always @(posedge iClk)
 begin
-    //rSelect <= (fValCount == 50) ? iSelect : rSelect;
-    rSelect <= iSelect;
+    rSelect <= (fValCount == 50) ? iSelect : rSelect;
+    // rSelect <= iSelect; For testbenching only
     rFval = iFval;
     if (!iRst_n)
     begin
@@ -90,7 +90,6 @@ begin
         dGray <= 0;
         rFval <= 0;
         rSelect <= 0;
-        fValCount <= 0;
     end else begin
         // Delay gray...
         dGray <= iGray;

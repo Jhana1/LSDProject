@@ -24,10 +24,7 @@ module Total_Module
     // Output
     output wire [15:0] wr1_data,
     output wire [15:0] wr2_data,
-    output wire WR_DATA_VAL,
-	 
-	 // Delayed Frame Threshold
-	 output wire [7:0] oThreshold
+    output wire WR_DATA_VAL
   );
   /*************************************************************
  * OUR STUFF **************
@@ -59,8 +56,6 @@ module Total_Module
   
   wire iClk = CCD_PIXCLK;
   reg rCCD_DVAL, dCCD_DVAL;
-  
-  assign oThreshold = cumulative_histo_threshold;
   
   always @(posedge iClk)
   begin
