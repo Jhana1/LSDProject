@@ -48,16 +48,29 @@
   Additionally the histogram module also handles clearing it's internal ram, which simplifies the interface for connection to the cumulative histogram module.
   
   \subsubsection{Histogram Module Testbench Results}
-
-  \subsubsection{Histogram Module Signal Tap Results}
   
+  \subsubsection{Histogram Module Signal Tap Results}
+    \begin{figure}[H]
+    \centering{\includegraphics[scale=\textwidth]{Images/Normal\ Histogram.png}}
+    \caption{Normal Operation Signal Tap}
+    \label{fig:histogram_signal_tap_normal_operation}
+  \end{figure}
+   \begin{figure}[H]
+    \centering{\includegraphics[scale=\textwidth]{Images/Edge\ Case\ Histogram.png}}
+    \caption{Edge Case Histogram Signal Tap}
+    \label{fig:histogram_signal_tap_edge_case_operation}
+  \end{figure}
   \subsubsection{Cumulative Histogram Module}
   The cumulative histogram is significantly more complex than the histogram module, as it is responsible for a number of \textit{administrative} or \textit{house keeping} tasks. The cumulative histogram iterates over the entire contents of the Histogram ram, cumulating the output and storing the result into another RAM for reading by the histogram display modules. Whilst the cumulative histogram module writes the cumulative values, it also stores the normal histogram values into one of two RAM's. This enables the stored RAM to be used for diaply on the next frame whilst the new histogram is being calculated. Once the frame is no longer valid, a toggle is switched so that the correct RAM is overwritten with the new values, and the other RAM is kept for display on the next frame.
 
   \subsubsection{Cumulative Histogram Testbench Results}
 
   \subsubsection{Cumulative Histogram Signal Tap Results}
-
+  \begin{figure}[H]
+    \centering{\includegraphics[scale=\textwidth]{Images/Normal\ Cumulative.png}}
+    \caption{Normal Operation Cumulative Histogram Signal Tap}
+    \label{fig:cumulative_histogram_signal_tap_normal_operation}
+  \end{figure}
 
   \subsection{Thresholding Module}
   \subsubsection{Description}
