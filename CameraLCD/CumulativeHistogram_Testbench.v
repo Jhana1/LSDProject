@@ -28,8 +28,8 @@ reg [7:0] read_addr, write_addr;
 reg [19:0] write_data;
 reg we;
 
-wire [7:0] thresh;
-wire [19:0] max_val;
+wire [7:0] thresh, thresh50;
+wire [19:0] max_val, qb;
 reg start, restart;
 
 CumulativeHistogram c1

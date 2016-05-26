@@ -1,30 +1,33 @@
+`default_nettype none
+
 module Total_Module
   (
     // General
-    input CCD_PIXCLK,
-    input iRst_n,
+    input wire CCD_PIXCLK,
+    input wire iRst_n,
 
     // Frame Related
-    input [15:0] iX_Cont,
-    input [15:0] iY_Cont,
-    input iFval,
+    input wire [15:0] iX_Cont,
+    input wire [15:0] iY_Cont,
+    input wire iFval,
 
     // RGB
-    input [11:0] iCCD_R,
-    input [11:0] iCCD_G,
-    input [11:0] iCCD_B,
-    input iCCD_DVAL,
+    input wire [11:0] iCCD_R,
+    input wire [11:0] iCCD_G,
+    input wire [11:0] iCCD_B,
+    input wire [11:0] iDelayedGray,
+    input wire iCCD_DVAL,
 
     // Display
-    input [17:0] iDisplaySelect,
+    input wire [17:0] iDisplaySelect,
 
     // Output
-    output [15:0] wr1_data,
-    output [15:0] wr2_data,
-    output WR_DATA_VAL,
+    output wire [15:0] wr1_data,
+    output wire [15:0] wr2_data,
+    output wire WR_DATA_VAL,
 	 
 	 // Delayed Frame Threshold
-	 output [7:0] oThreshold
+	 output wire [7:0] oThreshold
   );
   /*************************************************************
  * OUR STUFF **************
@@ -47,10 +50,10 @@ module Total_Module
   wire [7:0] display_cumh_rda;
   wire [19:0] display_cumh_q;
   wire [7:0] cumh_pixel;
-  wire [7:0] thresh_pixel, delayed_thresh_pixel, MultiThreshPixel;
+  wire [7:0] thresh_pixel, thresh_delayed_pixel, MultiThreshPixel;
   wire [7:0] cumulative_histo_threshold, THRESH_25, THRESH_75;
   wire hist_val;
-  wire thresh_val, delayed_thresh_val;
+  wire thresh_val, thresh_delayed_val;
   wire cumh_disp_red;
   wire MultiThreshValid;
   
@@ -142,6 +145,15 @@ module Total_Module
     .oPixel(thresh_pixel)
   );
   
+  Thresholder thresher_delayed(
+      .iClk(iClk),
+      .iGray(iDelayedGray), 
+      .iValid(iCCD_DVAL),
+      .iThreshold(cumulative_histo_threshold),
+      .oValid(thresh_delayed_val),
+      .oPixel(thresh_delayed_pixel)
+      );
+  
   MultiThresh m_thresher(
 	.iClk(iClk), 
 	.iGray(GRAY_DATA),
@@ -190,6 +202,9 @@ module Total_Module
     // Threshold Input
     .iThresh(thresh_pixel),
     .iThresh_Valid(thresh_val),
+    
+    .iThreshDelayed(thresh_delayed_pixel),
+    .iThreshDelayed_Valid(thresh_delayed_val),
 	 
 	 // Multithreshold Input
 	 .iMultiThresh(MultiThreshPixel),

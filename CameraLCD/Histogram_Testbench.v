@@ -31,8 +31,8 @@ Histogram histo
 );
 
 always begin
-    #0 clk = 0;
-    #1 clk = 1;
+    #0 clk = 1;
+    #1 clk = 0;
     #1 ;
 end
 
@@ -61,12 +61,11 @@ initial begin
     file = $fopen("shark_hist.txt", "w");
     valid = 0;
     gray = 0;
-    #2;
+    #100;
     for (i = 0; i < 256; i = i + 1) begin
         gray = i;
-        #2;
+        #4;
         $fwrite(file, "%d\n", histo_val);
-        #2;
     end
     
     $fclose(file);
