@@ -33,7 +33,6 @@ wire [7:0] oRed, oGreen, oBlue;
 assign oRed = wr2_data[9:2];
 assign oGreen = {wr1_data[14:10], wr2_data[14:12]};
 assign oBlue = wr1_data[9:2];
-assign oGray = oRed;
 
 Total_Module TOTAL
   (

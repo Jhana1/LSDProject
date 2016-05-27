@@ -534,6 +534,7 @@ Total_Module TOTAL
     .iCCD_R(sCCD_R),
     .iCCD_G(sCCD_G),
     .iCCD_B(sCCD_B),
+	 .iDelayedGray(delayed_gray),
     .iCCD_DVAL(sCCD_DVAL),
 
     // Display
@@ -543,13 +544,13 @@ Total_Module TOTAL
     .wr1_data(wr1_data),
     .wr2_data(wr2_data),
     .WR_DATA_VAL(WR_DATA_VAL),
-	 .oThreshold(threshold)
   );
 //////////////////				
 
 wire [15:0] wr1_data, wr2_data;
-wire [15:0] delayedFrame_DATA1, delayedFrame_DATA2;						
-wire [7:0] threshold;
+wire [15:0] rd1_data, rd2_data;
+wire [15:0] rd1_delay, rd2_delay;
+wire [7:0] delayed_gray = {rd1_delay[15], rd1_delay[1:0], rd2_delay[15], rd2_delay[11:10], rd2_delay[1:0]};
 
 // LK: takes 32 bit iDIG input and displays this on 8 seven segment displays oSEG0..7
 SEG7_LUT_8 			u4	(	.oSEG0(oHEX0_D),.oSEG1(oHEX1_D),
@@ -572,9 +573,6 @@ sdram_pll 			u6	(	.inclk0(iCLK_50_3),
 
 assign CCD_MCLK = rClk[0];
 
-//wire [15:0] wr1_data = iSW[1]? (X_Cont[3]/*^ Frame_Cont[0]*/? 15'b111111111111111:15'b0): {sCCD_G[11:7],	 sCCD_B[11:2]};
-//wire [15:0] wr2_data = iSW[1]? (X_Cont[3]/*^ Frame_Cont[0]*/? 10'b111111111111111:15'b0): {sCCD_G[6:2],    sCCD_R[11:2]};
-
 // LK: The SDRAM is used as a frame buffer using two of these Sdram_Control_4Port modules -  one for each SDRAM chip on the DE2-70 board.
 //     Camera data is loaded into the FIFO Write Side 1 and read out by the LCD display driver.
 Sdram_Control_4Port	u7	(	//	HOST Side
@@ -585,8 +583,6 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr1_data),  // LK: Camera Green and Blue components.
-//						    .WR1_DATA({sCCD_G[11:7],	 sCCD_B[11:2]}),  // LK: Camera Green and Blue components.
-							//.WR1(sCCD_DVAL),							  // LK: When 1 data is written to memory via FIFO on next WR1_CLK edge 
 							.WR1(WR_DATA_VAL),
 							.WR1_ADDR(0),									// LK: SDRAM start address - do not alter!
 							.WR1_MAX_ADDR(800*480),							//LK:  Buffer size.  Needs a RESET_N to take effect.
@@ -595,7 +591,7 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 							.WR1_CLK(CCD_PIXCLK),							// LK: Camera clock for writing data
 
 							//	FIFO Read Side 1
-						    .RD1_DATA(Read_DATA1),							// LK: Green and Blue components.
+						    .RD1_DATA(rd1_data),							// LK: Green and Blue components.
 				        	.RD1(Read),										// LK: When 1 data is read out of memory on next RD1_CLK edge 
 				        	.RD1_ADDR(0),
 							.RD1_MAX_ADDR(800*480),
@@ -605,6 +601,15 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 																			//		to remove 256 words remaining before the memory is
 																			//		properly reset.
 							.RD1_CLK(ltm_nclk),								// LK: LCD display for reading data
+							
+							//	FIFO Read Side 2
+						   .RD2_DATA(rd1_delay),							// LK: Green and Blue components.
+				        	.RD2(sCCD_DVAL),										// LK: When 1 data is read out of memory on next RD1_CLK edge 
+				        	.RD2_ADDR(0),
+							.RD2_MAX_ADDR(800*480),
+							.RD2_LENGTH(9'h100),							// LK: SDRAM line length of 256 - do not alter!
+							.RD2_LOAD(!DLY_RST_0),							// LK: Reset write FIFO feeding SDRAM
+							.RD2_CLK(CCD_PIXCLK),								// LK: LCD display for reading data
 							
 							//	SDRAM Side
 						    .SA(oDRAM0_A[11:0]),
@@ -625,9 +630,7 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							
 							//	FIFO Write Side 1
 						    .WR1_DATA(wr2_data),
-//						    .WR1_DATA({sCCD_G[6:2], sCCD_R[11:2]}),
 							 .WR1(WR_DATA_VAL),
-							//.WR1(sCCD_DVAL),
 							.WR1_ADDR(0),
 							.WR1_MAX_ADDR(800*480),
 							.WR1_LENGTH(9'h100),
@@ -635,7 +638,7 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							.WR1_CLK(CCD_PIXCLK),
 
 							//	FIFO Read Side 1
-						    .RD1_DATA(Read_DATA2),
+						   .RD1_DATA(rd2_data),
 				        	.RD1(Read),
 				        	.RD1_ADDR(0),
 							.RD1_MAX_ADDR(800*480),
@@ -643,9 +646,19 @@ Sdram_Control_4Port	u8	(	//	HOST Side
 							.RD1_LOAD(!DLY_RST_0),
 							.RD1_CLK(ltm_nclk),
 							
+							//	FIFO Read Side 2
+						   .RD2_DATA(rd2_delay),							// LK: Green and Blue components.
+				        	.RD2(sCCD_DVAL),										// LK: When 1 data is read out of memory on next RD1_CLK edge 
+				        	.RD2_ADDR(0),
+							.RD2_MAX_ADDR(800*480),
+							.RD2_LENGTH(9'h100),							// LK: SDRAM line length of 256 - do not alter!
+							.RD2_LOAD(!DLY_RST_0),							// LK: Reset write FIFO feeding SDRAM
+							.RD2_CLK(CCD_PIXCLK),								// LK: LCD display for reading data
+							
+					
 							//	SDRAM Side
-						    .SA(oDRAM1_A[11:0]),
-						    .BA(oDRAM1_BA),
+						   .SA(oDRAM1_A[11:0]),
+						   .BA(oDRAM1_BA),
         					.CS_N(oDRAM1_CS_N),
         					.CKE(oDRAM1_CKE),
         					.RAS_N(oDRAM1_RAS_N),
@@ -673,24 +686,15 @@ I2C_CCD_Config 		u9	(	//	Host Side
 						);
 						
 						
-/* OUR THING */
-wire [15:0] Read_DATA1_Delayed, Read_DATA2_Delayed;
 
- DelayThresholder dt(
-	.iEnable(iSW[6]),
-	.iThreshold(threshold),
-	.iData1(Read_DATA1),
-	.iData2(Read_DATA2),
-	.oData1(Read_DATA1_Delayed), 
-	.oData2(Read_DATA2_Delayed));
 						
 // LK:  LCD Display driver: Controls reading of the SDRAM buffers and sending data to LCD.
 // LK:  This module can be altered to overwrite the image on the display with for example touch point coordinates.
 touch_tcon			u10	( .iCLK(ltm_nclk),			// Display clock running @ 33 MHz
 							.iRST_n(DLY_RST_2),
 							// sdram side
-							.iREAD_DATA1(Read_DATA1_Delayed),	// LK: read SDRAM pixel values.
-							.iREAD_DATA2(Read_DATA2_Delayed),	// LK: read SDRAM pixel values.
+							.iREAD_DATA1(rd1_data),	// LK: read SDRAM pixel values.
+							.iREAD_DATA2(rd2_data),	// LK: read SDRAM pixel values.
 							.iTestMode(iSW[0]),
 							.oREAD_SDRAM_EN(Read),		// LK: 1 causes new data to be read on next ltm_nclk edge.
 														// LK: 0 means data does not change.

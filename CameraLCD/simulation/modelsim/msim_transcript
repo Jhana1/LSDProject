@@ -9,150 +9,34 @@
 # ** Warning: Copied /home/xavieran/altera/13.0sp1/modelsim_ase/linux/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/HistogramDisplayer.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module HistogramDisplayer
-# 
-# Top level modules:
-# 	HistogramDisplayer
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Histogram.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Histogram
-# 
-# Top level modules:
-# 	Histogram
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Arbitrator.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Arbitrator
-# 
-# Top level modules:
-# 	Arbitrator
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Thresholder.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Thresholder
-# 
-# Top level modules:
-# 	Thresholder
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/RGB2GRAY.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module RGB2GRAY
-# 
-# Top level modules:
-# 	RGB2GRAY
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/true_dpram_sclk.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module true_dpram_sclk
-# 
-# Top level modules:
-# 	true_dpram_sclk
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Histogram.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Total_Histogram
-# 
-# Top level modules:
-# 	Total_Histogram
 # vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module CumulativeHistogram
 # 
 # Top level modules:
 # 	CumulativeHistogram
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v}
+# 
+# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Total_Module
+# -- Compiling module true_dpram_sclk
+# -- Compiling module CumulativeHistogram_Testbench
 # 
 # Top level modules:
-# 	Total_Module
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/MultiThresh.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module MultiThresh
+# 	CumulativeHistogram_Testbench
 # 
-# Top level modules:
-# 	MultiThresh
-# 
-# vlog -vlog01compat -work work +incdir+/home/xavieran/BEngBSc/YEAR\ 5/Sem\ 1/ECE4063/ECE4063-Project/CameraLCD {/home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module Total_Module_Testbench
-# 
-# Top level modules:
-# 	Total_Module_Testbench
-# 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs="+acc"  Total_Module_Testbench
-# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps Total_Module_Testbench 
-# Loading work.Total_Module_Testbench
-# Loading work.Total_Module
-# Loading work.RGB2GRAY
-# Loading work.Total_Histogram
-# Loading work.Histogram
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs="+acc"  CumulativeHistogram_Testbench
+# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneii_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps CumulativeHistogram_Testbench 
+# Loading work.CumulativeHistogram_Testbench
 # Loading work.CumulativeHistogram
 # Loading work.true_dpram_sclk
-# Loading work.HistogramDisplayer
-# Loading work.Thresholder
-# Loading work.MultiThresh
-# Loading work.Arbitrator
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(89): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(90): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(91): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(114): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(115): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(116): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(141): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(142): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(143): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(167): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(168): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(169): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(194): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(195): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(196): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(221): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(222): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(223): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(247): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(248): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(249): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(273): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(274): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(275): Expected a system task, not a system function '$fscanf'.
-#         Region: /Total_Module_Testbench
-# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(62): [TFMPC] - Too few port connections. Expected 14, found 13.
-#         Region: /Total_Module_Testbench/TOTAL
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v(62): [TFMPC] - Missing connection for port 'oThreshold'.
-# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(102): [TFMPC] - Too few port connections. Expected 17, found 16.
-#         Region: /Total_Module_Testbench/TOTAL/T1
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(102): [TFMPC] - Missing connection for port 'oGrayCum'.
-# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Too few port connections. Expected 13, found 10.
-#         Region: /Total_Module_Testbench/TOTAL/cumh_display
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'iValid'.
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'oHistoAddr'.
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(133): [TFMPC] - Missing connection for port 'oValid'.
-# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Too few port connections. Expected 27, found 25.
-#         Region: /Total_Module_Testbench/TOTAL/arbiter
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Missing connection for port 'iThresh_d'.
-# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module.v(202): [TFMPC] - Missing connection for port 'iThresh_Valid_d'.
+# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(85): Expected a system task, not a system function '$fscanf'.
+#         Region: /CumulativeHistogram_Testbench
+# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Too few port connections. Expected 15, found 11.
+#         Region: /CumulativeHistogram_Testbench/c1
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oThresh25'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oThresh75'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oDataOutHist'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oAddrOutHist'.
 # 
 # add wave *
 # view structure
@@ -160,6 +44,42 @@
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# Break in Module Total_Module_Testbench at /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v line 288
-# Simulation Breakpoint: Break in Module Total_Module_Testbench at /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/Total_Module_Testbench.v line 288
-# MACRO ./DE2_70_run_msim_rtl_verilog.do PAUSED at line 26
+# Break in Module CumulativeHistogram_Testbench at /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v line 110
+# Simulation Breakpoint: Break in Module CumulativeHistogram_Testbench at /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v line 110
+# MACRO ./DE2_70_run_msim_rtl_verilog.do PAUSED at line 17
+add wave -position insertpoint  \
+sim:/CumulativeHistogram_Testbench/c1/delayed \
+sim:/CumulativeHistogram_Testbench/c1/doneAck \
+sim:/CumulativeHistogram_Testbench/c1/iClk \
+sim:/CumulativeHistogram_Testbench/c1/iQInHist \
+sim:/CumulativeHistogram_Testbench/c1/iRestart \
+sim:/CumulativeHistogram_Testbench/c1/iStart \
+sim:/CumulativeHistogram_Testbench/c1/max_value \
+sim:/CumulativeHistogram_Testbench/c1/oAddrInHist \
+sim:/CumulativeHistogram_Testbench/c1/oAddrOutCumH \
+sim:/CumulativeHistogram_Testbench/c1/oAddrOutHist \
+sim:/CumulativeHistogram_Testbench/c1/oDataOutCumH \
+sim:/CumulativeHistogram_Testbench/c1/oDataOutHist \
+sim:/CumulativeHistogram_Testbench/c1/oDone \
+sim:/CumulativeHistogram_Testbench/c1/oMaxValue \
+sim:/CumulativeHistogram_Testbench/c1/oThresh25 \
+sim:/CumulativeHistogram_Testbench/c1/oThresh50 \
+sim:/CumulativeHistogram_Testbench/c1/oThresh75 \
+sim:/CumulativeHistogram_Testbench/c1/oWE \
+sim:/CumulativeHistogram_Testbench/c1/percent25 \
+sim:/CumulativeHistogram_Testbench/c1/percent50 \
+sim:/CumulativeHistogram_Testbench/c1/percent75 \
+sim:/CumulativeHistogram_Testbench/c1/prev_max_value \
+sim:/CumulativeHistogram_Testbench/c1/state \
+sim:/CumulativeHistogram_Testbench/c1/word_size
+restart
+# ** Warning: (vsim-PLI-3691) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(85): Expected a system task, not a system function '$fscanf'.
+#         Region: /CumulativeHistogram_Testbench
+# ** Warning: (vsim-3017) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Too few port connections. Expected 15, found 11.
+#         Region: /CumulativeHistogram_Testbench/c1
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oThresh25'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oThresh75'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oDataOutHist'.
+# ** Warning: (vsim-3722) /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v(52): [TFMPC] - Missing connection for port 'oAddrOutHist'.
+run -all
+# Break in Module CumulativeHistogram_Testbench at /home/xavieran/BEngBSc/YEAR 5/Sem 1/ECE4063/ECE4063-Project/CameraLCD/CumulativeHistogram_Testbench.v line 110

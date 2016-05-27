@@ -31,8 +31,8 @@ module Arbitrator(
     input iThresh_Valid,
 	 
 	 // Threshold Delayed Frame
-	 input [7:0] iThresh_d,
-	 input iThresh_Valid_d,
+    input [7:0] iThreshDelayed,
+    input iThreshDelayed_Valid,
     
 	 // Multithresh Input
 	 input [7:0] iMultiThresh,
@@ -44,14 +44,14 @@ module Arbitrator(
 
     // Outputs
     output [15:0] oWr1_data,
-    output [15:0] oWr2_data,                        
+    output [15:0] oWr2_data,
     
     output reg oWr_data_valid
     );
 
 // Output Registers
 reg [11:0] disp_R, disp_G, disp_B;
-reg [10:0] rSelect;
+reg [17:0] rSelect;
 reg rFval;
 reg [7:0] fValCount;
 
@@ -74,9 +74,12 @@ reg [7:0] dGray;
 assign oWr1_data = {dGray[7], disp_G[11:7],             disp_B[11:4], dGray[6:5]};
 assign oWr2_data = {dGray[4], disp_G[6:4],  dGray[3:2], disp_R[11:4], dGray[1:0]};
 
+
+
 always @(posedge iClk)
 begin
     rSelect <= (fValCount == 50) ? iSelect : rSelect;
+    // rSelect <= iSelect; For testbenching only
     rFval = iFval;
     if (!iRst_n)
     begin
@@ -84,10 +87,15 @@ begin
         disp_R    <= 0;
         disp_G    <= 0;
         disp_B    <= 0;
-    end else begin  
-
+        dGray <= 0;
+        rFval <= 0;
+        rSelect <= 0;
+    end else begin
+        // Delay gray...
+        dGray <= iGray;
+        
         case (rSelect)
-        10'd2: begin // RGB Select
+        18'd2: begin // RGB Select
             if (iRGB_Valid) begin
                 disp_R    <= iRGB_R;
                 disp_G    <= iRGB_G;
@@ -100,7 +108,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        10'd4: begin // GRAY Select
+        18'd4: begin // GRAY Select
             if (iGray_Valid)
             begin
                 disp_R    <= iGray << 4;
@@ -114,7 +122,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        10'd8: begin // Histogram Select
+        18'd8: begin // Histogram Select
             if (iHist_Valid)
             begin
                 if (iHist_Red) begin
@@ -134,7 +142,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-        10'd16: begin // Display cumulative histogram
+        18'd16: begin // Display cumulative histogram
             if (iHist_Valid)
             begin
                 if (iCumHistRed) begin
@@ -154,7 +162,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-		  10'd32: begin // Threshold select - Wrong Frame
+        18'd32: begin // Threshold select - Wrong Frame
             if (iThresh_Valid)
             begin
                 disp_R    <= iThresh << 4;
@@ -168,12 +176,12 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-		  10'd64: begin // Threshold Select - Correct Frame
-				if (iGray_Valid)
+        18'd64: begin // Threshold Select - Correct Frame
+				if (iThreshDelayed_Valid)
 				begin
-					disp_R <= 0;
-					disp_G <= 0;
-					disp_B <= -1;
+					disp_R <= iThreshDelayed << 4;
+					disp_G <= iThreshDelayed << 4;
+					disp_B <= iThreshDelayed << 4;
 					oWr_data_valid <= 1;
 				end else begin
 					disp_R <= 0;
@@ -181,9 +189,8 @@ begin
 					disp_B <= 0;
 					oWr_data_valid <= 0;
 				end
-				dGray <= iGray;
 			end
-		  10'd128: begin // Not Smooth MultiThresh
+        18'd128: begin // Not Smooth MultiThresh
 		  if (iMultiThreshValid)
             begin
                 disp_R    <= iMultiThresh << 4;
@@ -197,7 +204,7 @@ begin
                 oWr_data_valid <= 0;
             end
         end
-		  10'd256: begin // Smooth Multithresh
+        18'd256: begin // Smooth Multithresh
 		  if (iMultiThreshValid)
             begin
                 disp_R    <= iMultiThresh << 4;
@@ -213,7 +220,7 @@ begin
         end
         default: begin
             disp_R        <= 255 << 4;
-            disp_G        <= 0;
+            disp_G        <= 255 << 4;
             disp_B        <= 0;
             oWr_data_valid <= iRGB_Valid;
         end
