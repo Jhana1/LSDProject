@@ -26,9 +26,6 @@ module Total_Module
     output wire [15:0] wr2_data,
     output wire WR_DATA_VAL
   );
-  /*************************************************************
- * OUR STUFF **************
- *****************************/
 
   // Registers and Wires				
   wire GRAY_VAL;
