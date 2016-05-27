@@ -15,7 +15,7 @@ module Total_Module
     input wire [11:0] iCCD_R,
     input wire [11:0] iCCD_G,
     input wire [11:0] iCCD_B,
-    input wire [11:0] iDelayedGray,
+    input wire [7:0] iDelayedGray,
     input wire iCCD_DVAL,
 
     // Display
@@ -56,16 +56,13 @@ module Total_Module
   
   wire iClk = CCD_PIXCLK;
   reg rCCD_DVAL, dCCD_DVAL;
-  
-  always @(posedge iClk)
-  begin
-    Rst_nR <= iRst_n;
-  end
+  reg [7:0] d_delayed_gray, r_delayed_gray;
+
   
   // Module Instantiations
   RGB2GRAY r2g (
     .iCLK(iClk),
-    .iReset_n(Rst_nR),
+    .iReset_n(iRst_n),
     .iRed(iCCD_R),
     .iGreen(iCCD_G),
     .iBlue(iCCD_B),
@@ -81,7 +78,7 @@ module Total_Module
   Total_Histogram T1
   (
     .iClk(iClk),
-    .iRst_n(Rst_nR),
+    .iRst_n(iRst_n),
     .iGray(GRAY_DATA),
     .iGrayValid(GRAY_VAL),
     .iFvalid(iFval),
@@ -142,8 +139,8 @@ module Total_Module
   
   Thresholder thresher_delayed(
       .iClk(iClk),
-      .iGray(iDelayedGray), 
-      .iValid(iCCD_DVAL),
+      .iGray(d_delayed_gray), 
+      .iValid(GRAY_VAL),
       .iThreshold(cumulative_histo_threshold),
       .oValid(thresh_delayed_val),
       .oPixel(thresh_delayed_pixel)
@@ -165,7 +162,7 @@ module Total_Module
   Arbitrator arbiter
   (
     .iClk(iClk),
-    .iRst_n(Rst_nR),
+    .iRst_n(iRst_n),
     // Select Input
     .iSelect(iDisplaySelect),
     .iFval(iFval), // ?????????

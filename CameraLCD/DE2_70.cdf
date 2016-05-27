@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP2C70F896) Path("C:/Users/jhana1/Downloads/ECE4063-Project/CameraLCD/") File("DE2_70.sof") MfrSpec(OpMask(1));
+		Device PartName(EP2C70F896) Path("C:/Users/enjac2/4063/GitPortable/Data/home/ECE4063-Project/CameraLCD/") File("DE2_70.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
